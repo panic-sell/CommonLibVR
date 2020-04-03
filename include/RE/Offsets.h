@@ -59,7 +59,7 @@ namespace RE
 			// DirectSig: 48 85 D2 0F 84 ? ? ? ? 57 48 83 EC 50 48 C7 44 24 ? ? ? ? ? 48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 49 8B D9
 			constexpr std::uintptr_t EquipObject = 0x00640A90;		// VR 1_4_15
 			// 88 4C 24 30 48 8B 0D ? ? ? ? 48 C7 44 24 ? ? ? ? ?
-			constexpr std::uintptr_t Singleton = 0x02EC4838;		// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02F896D8;		// VR
 			// IndirectSig: E8 ? ? ? ? 84 C0 0F 94 C0 33 F6
 			constexpr std::uintptr_t UnequipObject = 0x006411A0;	// VR 1_4_15
 		}
@@ -121,7 +121,7 @@ namespace RE
 			// DirectSig: 44 89 44 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ? ? ? ?
 			constexpr std::uintptr_t Save = 0x0058E310;			// VR 1_4_15
 			// 48 89 05 ? ? ? ? 48 8B 0D ? ? ? ? 48 81 C1 ? ? ? ?
-			constexpr std::uintptr_t Singleton = 0x02F26740;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEB248;	// VR 1_4_15
 			// DirectSig: 48 8B C4 48 89 58 10 57 48 81 EC ? ? ? ? 48 8B DA 66 C7 40 ? ? ?
 			constexpr std::uintptr_t Load = 0x0058E920;			// VR 1_4_15
 		}
@@ -183,7 +183,7 @@ namespace RE
 		namespace BSInputDeviceManager
 		{
 			// 74 0D 48 83 C0 A8
-			constexpr std::uintptr_t Singleton = 0x02F257A8;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEA520;  // VR
 		}
 
 
@@ -225,7 +225,7 @@ namespace RE
 			// IndirectSig: E8 ? ? ? ? 84 C0 74 50 48 8B 4F 10
 			constexpr std::uintptr_t LoadMovie = 0x00F2B480;	// VR 1_4_15
 			// 48 89 0D ? ? ? ? 4C 89 79 18
-			constexpr std::uintptr_t Singleton = 0x02F257A0;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEA518;  // VR
 		}
 
 
@@ -350,7 +350,7 @@ namespace RE
 		namespace ConsoleLog
 		{
 			// E8 ? ? ? ? 48 89 2D ? ? ? ? 48 8B 0D ? ? ? ? 48 85 C9 74 0C E8 ? ? ? ? 48 89 2D ? ? ? ? 48 8B 0D ? ? ? ? 48 85 C9 74 0C E8 ? ? ? ? 48 89 2D ? ? ? ? 48 8B 0D ? ? ? ?
-			constexpr std::uintptr_t Singleton = 0x02F000F0;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FC4FE0; // VR
 			// DirectSig: 48 8B C4 57 41 54 41 55 41 56 41 57 48 83 EC 40 48 C7 40 ? ? ? ? ? 48 89 58 10 48 89 68 18 48 89 70 20 4D 8B F8 4C 8B E2
 			constexpr std::uintptr_t VPrint = 0x00886DF0;		// VR 1_4_15
 		}
@@ -551,7 +551,7 @@ namespace RE
 		namespace GameSettingCollection
 		{
 			// 48 83 3D ? ? ? ? ? 75 63
-			constexpr std::uintptr_t Singleton = 0x02EC58B0;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02F8A780;	// VR
 		}
 
 
@@ -623,7 +623,7 @@ namespace RE
 		namespace GMemory
 		{
 			// GFxFunctionHandler::virt_dtor + 35
-			constexpr std::uintptr_t GlobalHeap = 0x03032C50;	// 1_5_97
+			constexpr std::uintptr_t GlobalHeap = 0x0318CE40;	// VR
 		}
 
 
@@ -653,14 +653,14 @@ namespace RE
 		namespace INIPrefSettingCollection
 		{
 			// 48 8D 4B 08 4C 3B C1 74 11 BA ? ? ? ? FF 15 ? ? ? ? EB 04 C6 43 08 00 48 8B 03 B2 01 48 8B CB FF 50 28 84 C0 74 18
-			constexpr std::uintptr_t Singleton = 0x02F6BA48;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x030C3B18;  // VR
 		}
 
 
 		namespace INISettingCollection
 		{
 			// 48 05 ? ? ? ? 74 4B
-			constexpr std::uintptr_t Singleton = 0x0301D758;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x03175FE0;  // VR
 		}
 
 
@@ -767,7 +767,7 @@ namespace RE
 		namespace MagicFavorites
 		{
 			// 48 C7 05 ? ? ? ? ? ? ? ? 48 8B 5C 24 ? 48 83 C4 30 5F C3 CC 48 89 5C 24 ?
-			constexpr std::uintptr_t Singleton = 0x02F26730;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEB238;  // VR
 		}
 
 
@@ -891,7 +891,7 @@ namespace RE
 		namespace PlayerCamera
 		{
 			// 74 0D 48 83 C0 C7
-			constexpr std::uintptr_t Singleton = 0x02EC59B8;			// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02F8A888;  // VR
 			// IndirectSig: E8 ? ? ? ? 48 3B 1D ? ? ? ? 75 1C 48 8B 0D ? ? ? ?
 			constexpr std::uintptr_t UpdateThirdPerson = 0x00877DB0;	// VR 1_4_15
 		}
@@ -923,7 +923,7 @@ namespace RE
 			// IndirectSig: E8 ? ? ? ? 44 89 65 67
 			constexpr std::uintptr_t PlayPickupEvent = 0x006C0640;			// VR 1_4_15
 			// E8 ? ? ? ? 48 89 35 ? ? ? ? 48 8B C6
-			constexpr std::uintptr_t Singleton = 0x02F26EF8;				// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEB9F0;				// VR
 			// IndirectSig: E8 ? ? ? ? 48 8B 05 ? ? ? ? 83 B8 ? ? ? ? ? 0F 95 C0
 			constexpr std::uintptr_t StartGrabObject = 0x006CC000;			// VR 1_4_15
 			// VTable: .?AVPlayerCharacter@@
@@ -936,7 +936,7 @@ namespace RE
 			// IndirectSig: E8 ? ? ? ? 90 48 89 05 ? ? ? ? 43 89 1C 34
 			constexpr std::uintptr_t Ctor = 0x0072B900;			// VR 1_4_15
 			// 74 0D 48 83 C0 E0 48 89 05 ? ? ? ?
-			constexpr std::uintptr_t Singleton = 0x02EC5BD8;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02F8AAA8;	// VR
 		}
 
 
@@ -1014,7 +1014,7 @@ namespace RE
 			// IndirectSig: E8 ? ? ? ? 84 C0 0F 94 C3 48 8B 4C 24 ? 48 85 C9 74 15
 			constexpr std::uintptr_t QueuePostRenderCall = 0x0095FD10;	// VR 1_4_15
 			// E8 ? ? ? ? 90 48 89 05 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ?
-			constexpr std::uintptr_t Singleton = 0x01EC3B78;			// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x01F889D8;			// VR 1_4_15
 		}
 
 
@@ -1065,7 +1065,7 @@ namespace RE
 			// IndirectSig: E8 ? ? ? ? 83 3D ? ? ? ? ? 74 13 48 8D 15 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 33 D2 48 8D 0D ? ? ? ? E8 ? ? ? ? 8B 0D ? ? ? ?
 			constexpr std::uintptr_t LoadScripts = 0x00181B80;	// VR 1_4_15
 			// 48 89 05 ? ? ? ? 49 8B D6
-			constexpr std::uintptr_t Singleton = 0x01EBE428;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x01F82AD8;  // VR
 		}
 
 
@@ -1191,7 +1191,7 @@ namespace RE
 		namespace UI
 		{
 			// 48 89 0D ? ? ? ? 48 83 C1 08 E8 ? ? ? ? 90 48 8D 4F 60
-			constexpr std::uintptr_t Singleton = 0x01EBEB20;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x01F83200;   // VR
 		}
 
 
@@ -1215,14 +1215,14 @@ namespace RE
 			// IndirectSig: E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 41 C6 86 ? ? ? ? ?
 			constexpr std::uintptr_t ProcessCommands = 0x00F1FBC0;		// VR 1_4_15
 			// 48 89 0D ? ? ? ? 33 C9 89 4B 10
-			constexpr std::uintptr_t Singleton = 0x01EC0A70;			// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x01F850F8;			// VR
 		}
 
 
 		namespace UserEvents
 		{
 			// E8 ? ? ? ? 90 48 89 05 ? ? ? ? 48 8D 4F 60
-			constexpr std::uintptr_t Singleton = 0x02F25250;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEA140;  // VR
 		}
 
 
