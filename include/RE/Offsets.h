@@ -327,7 +327,7 @@ namespace RE
 		namespace Calendar
 		{
 			//
-			constexpr std::uintptr_t Singleton = 0x01EC0A80;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x01F85108;  // VR
 		}
 
 
@@ -943,7 +943,7 @@ namespace RE
 		namespace ProcessLists
 		{
 			// 4C 8B F9 48 89 0D ? ? ? ?
-			constexpr std::uintptr_t Singleton = 0x01EBEAD0;					// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x01F831B0;					// VR
 			// IndirectSig: E8 ? ? ? ? 48 8B 13 48 8B CB FF 92 ? ? ? ? 33 D2
 			constexpr std::uintptr_t StopCombatAndAlarmOnActor = 0x00700330;	// VR 1_4_15
 		}
