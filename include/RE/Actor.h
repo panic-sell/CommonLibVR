@@ -347,9 +347,9 @@ namespace RE
 		virtual void				 PlayPickUpSound(TESBoundObject* a_object, bool a_pickup, bool a_use);																											  // 0A3
 		virtual float				 GetHeading(bool a_ignoreRaceSettings) const;																																	  // 0A4
 		virtual void				 SetAvoidanceDisabled(bool a_set);																																				  // 0A5 - { return; }
-		virtual void				 DrawWeaponMagicHands(bool a_draw);																																				  // 0A6
+		virtual void				 Unk_A6(void);																																										// 0A6
 		virtual void				 Unk_A7(void);																																									  // 0A7
-		virtual void				 Unk_A8(void);																																									  // 0A8
+		virtual void				 DrawWeaponMagicHands(bool a_draw);																																				  // 0A8
 		virtual void				 SetPosition(const NiPoint3& a_pos, bool a_updateCharController);																												  // 0A9
 		virtual void				 KillDying();																																									  // 0AA
 		virtual void				 Resurrect(bool a_resetInventory, bool a_attach3D);																																  // 0AB
@@ -431,54 +431,54 @@ namespace RE
 		virtual void				 UseSkill(ActorValue a_av, float a_points, TESForm* a_arg3);																													  // 0F7 - { return; }
 		virtual bool				 IsAtPoint(const NiPoint3& a_point, float a_radius, bool a_expandRadius, bool a_alwaysTestHeight);																				  // 0F8
 		virtual bool				 IsInFaction(const TESFaction* faction) const;																																	  // 0F9
-		virtual void				 ForEachPerk(PerkEntryVisitor& a_visitor) const;																																  // 0FA
-		virtual void				 AddPerk(BGSPerk* a_perk, UInt32 a_rank = 0);																																	  // 0FB - { return; }
-		virtual void				 RemovePerk(BGSPerk* a_perk);																																					  // 0FC - { return; }
-		virtual void				 Unk_FD(void);																																									  // 0FD - { return; }
-		virtual void				 Unk_FE(void);																																									  // 0FE - { return; }
-		virtual bool				 HasPerkEntries(EntryPoint a_entryType) const;																																	  // 0FF
-		virtual void				 ForEachPerkEntry(EntryPoint a_entryType, PerkEntryVisitor& a_visitor) const;																									  // 100
-		virtual void				 ApplyPerksFromBase();																																							  // 101
-		virtual void				 StartPowerAttackCoolDown();																																					  // 102 - { return; }
-		virtual bool				 IsPowerAttackCoolingDown() const;																																				  // 103 - { return false; }
-		virtual void				 HandleHealthDamage(Actor* a_attacker, float a_damage);																															  // 104
-		virtual void				 Unk_105(void);																																									  // 105
-		virtual void				 Unk_106(void);																																									  // 106 - { return; }
-		virtual bool				 QSpeakingDone() const;																																							  // 107 - { return ~(unk0E0 >> 5) & 1; }
-		virtual void				 SetSpeakingDone(bool a_set);																																					  // 108
-		virtual void				 CreateMovementController();																																					  // 109
-		virtual void				 Unk_10A(void);																																									  // 10A - { return unk16C; }
-		virtual void				 Unk_10B(void);																																									  // 10B - { unk16C = a_arg1; }
-		virtual void				 Unk_10C(void);																																									  // 10C - { return unk170; }
-		virtual void				 Unk_10D(void);																																									  // 10D - { unk170 = a_arg1; }
-		virtual void				 KillImpl(Actor* a_attacker, float a_damage, bool a_sendEvent, bool a_ragdollInstant);																							  // 10E
-		virtual void				 Unk_10F(void);																																									  // 10F
-		virtual bool				 CheckCast(MagicItem* a_spell, bool a_dualCast, MagicSystem::CannotCastReason* a_reason);																						  // 110
-		virtual void				 CheckTempModifiers();																																							  // 111 - { return; }
-		virtual SInt32				 GetCurrentShoutLevel();																																						  // 112 - return -1 on error
-		virtual void				 SetLastRiddenMount(ActorHandle a_mount);																																		  // 113 - { return; }
-		virtual ActorHandle			 QLastRiddenMount() const;																																						  // 114 - { return {}; }
-		virtual bool				 CalculateCachedOwnerIsUndead() const;																																			  // 115
-		virtual bool				 CalculateCachedOwnerIsNPC() const;																																				  // 116
-		virtual void				 Unk_117(void);																																									  // 117 - { return; }
-		virtual void				 Unk_118(void);																																									  // 118
-		virtual const BSFixedString& GetResponseString() const;																																						  // 119 - { return "ActorResponse"; }
-		virtual void				 Unk_11A(void);																																									  // 11A
-		virtual void				 UpdateCombatControllerSettings();																																				  // 11B
-		virtual void				 UpdateFadeSettings(bhkCharacterController* a_controller);																														  // 11C
-		virtual bool				 ComputeMotionFeedbackSpeedAndDirection(const ActorMotionFeedbackData& a_data, float a_delta, ActorMotionFeedbackOutput& a_output);												  // 11D
-		virtual bool				 UpdateFeedbackGraphSpeedAndDirection(const ActorMotionFeedbackOutput& a_output);																								  // 11E
-		virtual void				 UpdateActor3DPosition();																																						  // 11F
-		virtual void				 PrecacheData();																																								  // 120
-		virtual void				 WornArmorChanged(void);																																						  // 121
-		virtual void				 ProcessTracking(float a_delta, NiAVObject* a_obj3D);																															  // 122
-		virtual void				 Unk_123(void);																																									  // 123
-		virtual void				 CreateActorMover();																																							  // 124
-		virtual void				 DestroyActorMover();																																							  // 125
-		virtual bool				 ShouldRespondToActorCollision(const MovementMessageActorCollision& a_msg, const ActorHandlePtr& a_target);																		  // 126
-		virtual float				 CheckClampDamageModifier(ActorValue a_av, float a_delta);																														  // 127
-
-		static NiPointer<Actor> LookupByHandle(RefHandle a_refHandle);
+		virtual void Unk_FA(void); // VR shift patch here																																							  // 0FA
+		virtual void Unk_FB(void);																																													// 0FB - { return; }
+		virtual void				 ForEachPerk(PerkEntryVisitor& a_visitor) const;																																  // 0FC - { return; }
+		virtual void				 AddPerk(BGSPerk* a_perk, UInt32 a_rank = 0);																																	  // 0FD - { return; }
+		virtual void				 RemovePerk(BGSPerk* a_perk);																																					  // 0FE - { return; }
+		virtual void				 Unk_FD(void);																																									  // 0FF
+		virtual void				 Unk_FE(void);																																									  // 100
+		virtual bool				 HasPerkEntries(EntryPoint a_entryType) const;																																	  // 101
+		virtual void				 ForEachPerkEntry(EntryPoint a_entryType, PerkEntryVisitor& a_visitor) const;																									  // 102 - { return; }
+		virtual void				 ApplyPerksFromBase();																																							  // 103 - { return false; }
+		virtual void				 StartPowerAttackCoolDown();																																					  // 104
+		virtual bool				 IsPowerAttackCoolingDown() const;																																				  // 105
+		virtual void				 HandleHealthDamage(Actor* a_attacker, float a_damage);																															  // 106 - { return; }
+		virtual void				 Unk_105(void);																																									  // 107 - { return ~(unk0E0 >> 5) & 1; }
+		virtual void				 Unk_106(void);																																									  // 108
+		virtual bool				 QSpeakingDone() const;																																							  // 109
+		virtual void				 SetSpeakingDone(bool a_set);																																					  // 10A - { return unk16C; }
+		virtual void				 CreateMovementController();																																					  // 10B - { unk16C = a_arg1; }
+		virtual void				 Unk_10A(void);																																									  // 10C - { return unk170; }
+		virtual void				 Unk_10B(void);																																									  // 10D - { unk170 = a_arg1; }
+		virtual void				 Unk_10C(void);																																									  // 10E
+		virtual void				 Unk_10D(void);																																									  // 10F
+		virtual void				 KillImpl(Actor* a_attacker, float a_damage, bool a_sendEvent, bool a_ragdollInstant);																							  // 110
+		virtual void				 Unk_10F(void);																																									  // 111 - { return; }
+		virtual bool				 CheckCast(MagicItem* a_spell, bool a_dualCast, MagicSystem::CannotCastReason* a_reason);																						  // 112 - return -1 on error
+		virtual void				 CheckTempModifiers();																																							  // 113 - { return; }
+		virtual SInt32				 GetCurrentShoutLevel();																																						  // 114 - { return {}; }
+		virtual void				 SetLastRiddenMount(ActorHandle a_mount);																																		  // 115
+		virtual ActorHandle			 QLastRiddenMount() const;																																						  // 116
+		virtual bool				 CalculateCachedOwnerIsUndead() const;																																			  // 117 - { return; }
+		virtual bool				 CalculateCachedOwnerIsNPC() const;																																				  // 118
+		virtual void				 Unk_117(void);																																									  // 119 - { return "ActorResponse"; }
+		virtual void				 Unk_118(void);																																									  // 11A
+		virtual const BSFixedString& GetResponseString() const;																																						  // 11B
+		virtual void				 Unk_11A(void);																																									  // 11C
+		virtual void				 UpdateCombatControllerSettings();																																				  // 11D
+		virtual void				 UpdateFadeSettings(bhkCharacterController* a_controller);																														  // 11E
+		virtual bool				 ComputeMotionFeedbackSpeedAndDirection(const ActorMotionFeedbackData& a_data, float a_delta, ActorMotionFeedbackOutput& a_output);												  // 11F
+		virtual bool				 UpdateFeedbackGraphSpeedAndDirection(const ActorMotionFeedbackOutput& a_output);																								  // 120
+		virtual void				 UpdateActor3DPosition();																																						  // 121
+		virtual void				 PrecacheData();																																								  // 122
+		virtual void				 WornArmorChanged(void);																																						  // 123
+		virtual void				 ProcessTracking(float a_delta, NiAVObject* a_obj3D);																															  // 124
+		virtual void				 Unk_123(void);																																									  // 125
+		virtual void				 CreateActorMover();																																							  // 126
+		virtual void				 DestroyActorMover();																																							  // 127
+		virtual bool				 ShouldRespondToActorCollision(const MovementMessageActorCollision& a_msg, const ActorHandlePtr& a_target);
+		virtual float				 CheckClampDamageModifier(ActorValue a_av, float a_delta);																						static NiPointer<Actor> LookupByHandle(RefHandle a_refHandle);
 		static bool				LookupByHandle(RefHandle a_refHandle, NiPointer<Actor>& a_refrOut);
 
 		bool					  AddSpell(SpellItem* a_spell);
