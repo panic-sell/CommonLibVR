@@ -117,4 +117,6 @@ namespace SKSE
 	static constexpr Version RUNTIME_1_5_73(1, 5, 73, 0);
 	static constexpr Version RUNTIME_1_5_80(1, 5, 80, 0);
 	static constexpr Version RUNTIME_1_5_97(1, 5, 97, 0);
+
+	static constexpr Version RUNTIME_VR_1_4_15(1, 4, 15, 0);
 }
