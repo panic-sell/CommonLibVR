@@ -176,7 +176,7 @@ namespace REL
 
 
 	Module::Module() :
-		_handle(GetModuleHandleA("SkyrimSE.exe")),
+		_handle(GetModuleHandleA("SkyrimVR.exe")),
 		_base(0),
 		_sections(),
 		_size(0),
