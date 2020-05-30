@@ -163,7 +163,7 @@ namespace SKSE
 			}
 
 			// ensure static data managers are initialized if not already
-			[[maybe_unused]] auto idTest = REL::IDDatabase::IDToOffset(0);
+//			[[maybe_unused]] auto idTest = REL::IDDatabase::IDToOffset(0);
 			[[maybe_unused]] auto moduleTest = REL::Module::BaseAddr();
 
 			g_apiInit = true;

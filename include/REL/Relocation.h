@@ -812,7 +812,7 @@ namespace REL
 
 
 		constexpr Offset(std::uintptr_t a_offset) noexcept :
-			_address(a_offset)
+			_address(Module::BaseAddr() + a_offset)
 		{}
 
 
