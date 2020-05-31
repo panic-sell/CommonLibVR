@@ -316,26 +316,26 @@ namespace RE
 		virtual bool					ShouldPerformRevert() const override;																																											// 07C
 		virtual void					UpdateAnimation(float a_delta) override;																																										// 07D
 		virtual void					Unk_82(void) override;																																															// 082
-		virtual void					SetObjectReference(TESBoundObject* a_object) override;																																							// 084
-		virtual void					MoveHavok(bool a_forceRec) override;																																											// 085
-		virtual void					GetLinearVelocity(NiPoint3& a_velocity) const override;																																							// 086
-		virtual void					SetActionComplete(bool a_set) override;																																											// 087
-		virtual void					Disable() override;																																																// 089
-		virtual void					ResetInventory(bool a_leveledOnly) override;																																									// 08A
-		virtual void					Unk_8B(void) override;																																															// 08B
+		virtual void					SetObjectReference(TESBoundObject* a_object) override;																																							// 085
+		virtual void					MoveHavok(bool a_forceRec) override;																																											// 086
+		virtual void					GetLinearVelocity(NiPoint3& a_velocity) const override;																																							// 087
+		virtual void					SetActionComplete(bool a_set) override;																																											// 088
+		virtual void					Disable() override;																																																// 08A
+		virtual void					ResetInventory(bool a_leveledOnly) override;																																									// 08B
 		virtual void					Unk_8C(void) override;																																															// 08C
-		virtual bool					OnAddCellPerformQueueReference(TESObjectCELL& a_cell) const override;																																			// 090
-		virtual void					DoMoveToHigh() override;																																														// 091
-		virtual void					TryMoveToMiddleLow() override;																																													// 092
-		virtual bool					TryChangeSkyCellActorsProcessLevel() override;																																									// 093
-		virtual void					Unk_95(void) override;																																															// 095
+		virtual void					Unk_8D(void) override;																																															// 08D
+		virtual bool					OnAddCellPerformQueueReference(TESObjectCELL& a_cell) const override;																																			// 091
+		virtual void					DoMoveToHigh() override;																																														// 092
+		virtual void					TryMoveToMiddleLow() override;																																													// 093
+		virtual bool					TryChangeSkyCellActorsProcessLevel() override;																																									// 094
 		virtual void					Unk_96(void) override;																																															// 096
-		virtual void					SetParentCell(TESObjectCELL* a_cell) override;																																									// 098
-		virtual bool					IsDead(bool a_notEssential) const override;																																										// 099
-		virtual void					Unk_9C(void) override;																																															// 09C
+		virtual void					Unk_97(void) override;																																															// 097
+		virtual void					SetParentCell(TESObjectCELL* a_cell) override;																																									// 099
+		virtual bool					IsDead(bool a_notEssential) const override;																																										// 09A
 		virtual void					Unk_9D(void) override;																																															// 09D
-		virtual TESAmmo*				GetCurrentAmmo() const override;																																												// 09E
-		virtual void					UnequipItem(UInt64 a_arg1, TESBoundObject* a_object) override;																																					// 0A1
+		virtual void					Unk_9E(void) override;																																															// 09E
+		virtual TESAmmo*				GetCurrentAmmo() const override;																																												// 09F
+		virtual void					UnequipItem(UInt64 a_arg1, TESBoundObject* a_object) override;																																					// 0A2
 
 		// override (MagicTarget)
 		virtual Actor*						 GetTargetStatsObject() override;	   // 002 - { return this; }
