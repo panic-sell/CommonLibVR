@@ -70,7 +70,8 @@ namespace RE
 
 	NiPointer<TESObjectREFR> PlayerCharacter::GetGrabbedRef()
 	{
-		return grabbedObject.get();
+		//return grabbedObject.get();
+		return nullptr;    // Not sure this exists anymore in VR.   will need to hunt
 	}
 
 
@@ -81,26 +82,29 @@ namespace RE
 		return func(this, a_tintType);
 	}
 
-
+	// TODO need to understand how this changed in VR
 	TintMask* PlayerCharacter::GetOverlayTintMask(TintMask* a_original)
 	{
-		if (!overlayTintMasks) {
-			return nullptr;
-		}
+		//if (!overlayTintMasks) {
+		//	return nullptr;
+		//}
 
-		for (UInt32 i = 0; i < tintMasks.size(); ++i) {
-			if (tintMasks[i] == a_original) {
-				return i < overlayTintMasks->size() ? (*overlayTintMasks)[i] : nullptr;
-			}
-		}
+		//for (UInt32 i = 0; i < tintMasks.size(); ++i) {
+		//	if (tintMasks[i] == a_original) {
+		//		return i < overlayTintMasks->size() ? (*overlayTintMasks)[i] : nullptr;
+		//	}
+		//}
 
 		return nullptr;
 	}
 
+	// TODO need to understand how this changed in VR
 
 	BSTArray<TintMask*>& PlayerCharacter::GetTintList()
 	{
-		return overlayTintMasks ? *overlayTintMasks : tintMasks;
+		//return overlayTintMasks ? *overlayTintMasks : tintMasks;
+		BSTArray<TintMask*> ret(0);
+		return ret;
 	}
 
 
