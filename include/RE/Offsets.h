@@ -105,7 +105,7 @@ namespace RE
 		namespace BGSFootstepManager
 		{
 			// E8 ? ? ? ? 90 48 89 1D ? ? ? ? 48 8D 0D ? ? ? ?
-			constexpr std::uintptr_t Singleton = 0x02F27150;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEBC50;	// VR
 		}
 
 
@@ -1035,7 +1035,7 @@ namespace RE
 		namespace TES
 		{
 			// 45 33 C9 48 8B 0D ? ? ? ? 48 C7 44 24 28 00 00 00 00
-			constexpr std::uintptr_t Singleton = 0x02F26B20;	// 1_5_97
+			constexpr std::uintptr_t Singleton = 0x02FEB6F8;	// VR
 		}
 
 
