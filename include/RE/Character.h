@@ -41,15 +41,15 @@ namespace RE
 		virtual BSFaceGenAnimationData* GetFaceGenAnimationData() override;											// 063
 		virtual void					SetBiped(const BSTSmartPointer<BipedAnim>& a_biped) override;				// 081
 		virtual void					InitiateVampireFeedPackage(Actor* a_arg1, TESObjectREFR* a_arg2) override;	// 0C0
-		virtual void					Unk_C4(void) override;														// 0C4 - { unk272 = a_arg1; }
-		virtual void					Unk_C5(void) override;														// 0C5 - { return unk272; }
-		virtual void					Unk_C6(void) override;														// 0C6 - { return 1; }
+		virtual void					Unk_C6(void) override;														// 0C4 - { unk272 = a_arg1; }
+		virtual void					Unk_C7(void) override;														// 0C5 - { return unk272; }
+		virtual void					Unk_C8(void) override;														// 0C6 - { return 1; }
 		virtual void					OnArmorActorValueChanged() override;										// 0CA
-		virtual void					Unk_D7(void) override;														// 0D7
-		virtual void					Unk_D9(void) override;														// 0D9
-		virtual void					Unk_E6(void) override;														// 0E6 - calculate armor rating?
-		virtual void					Unk_E7(void) override;														// 0E7 - something about armor rating
-		virtual void					Unk_E8(void) override;														// 0E8 - get unarmed damage?
+		virtual void					Unk_D9(void) override;														// 0D7
+		virtual void					Unk_DB(void) override;														// 0D9
+		virtual void					Unk_E8(void) override;														// 0E6 - calculate armor rating?
+		virtual void					Unk_E9(void) override;														// 0E7 - something about armor rating
+		virtual void					Unk_EA(void) override;														// 0E8 - get unarmed damage?
 		virtual void					PrecacheData(void) override;												// 120
 
 		// add
