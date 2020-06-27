@@ -9,4 +9,4 @@ This is still in development, any help from the community to correct errors woul
 
 ## Credits
 * Thanks to Ryan McKenzie for original code
-* Thanks to RollingRock & po3 for important conributions
+* Thanks to RollingRock & po3 for important contributions
