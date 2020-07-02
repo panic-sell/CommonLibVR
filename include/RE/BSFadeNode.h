@@ -20,8 +20,8 @@ namespace RE
 
 		// override (NiNode)
 		virtual const NiRTTI* GetRTTI() const override;													 // 02
-		virtual BSFadeNode*	  AsFadeNode() override;													 // 05 - { return this; }
-		virtual NiObject*	  CreateClone(NiCloningProcess& a_cloning) override;						 // 17
+		virtual BSFadeNode* AsFadeNode() override;													 // 05 - { return this; }
+		virtual NiObject* CreateClone(NiCloningProcess& a_cloning) override;						 // 17
 		virtual void		  LoadBinary(NiStream& a_stream) override;									 // 18
 		virtual void		  LinkObject(NiStream& a_stream) override;									 // 19
 		virtual bool		  RegisterStreamables(NiStream& a_stream) override;							 // 1A
@@ -31,13 +31,18 @@ namespace RE
 		virtual void		  OnVisible(NiCullingProcess& a_process) override;							 // 34
 
 		// add
-		virtual BSTreeNode*		AsTreeNode();	   // 3E - { return 0; }
+		virtual BSTreeNode* AsTreeNode();	   // 3E - { return 0; }
 		virtual BSLeafAnimNode* AsLeafAnimNode();  // 3F - { return 0; }
 
 
 		// members
 		float  unk128;		 // 128
 		float  unk12C;		 // 12C
+		uint64_t pad1;   // VR offset moved by 0x28
+		uint64_t pad2;
+		uint64_t pad3;
+		uint64_t pad4;
+		uint64_t pad5;
 		float  currentFade;	 // 130
 		UInt32 unk134;		 // 134
 		UInt32 unk138;		 // 138
@@ -53,5 +58,5 @@ namespace RE
 		UInt8  unk155;		 // 155
 		UInt16 unk156;		 // 156
 	};
-	STATIC_ASSERT(sizeof(BSFadeNode) == 0x158);
+	STATIC_ASSERT(sizeof(BSFadeNode) == 0x180);
 }
