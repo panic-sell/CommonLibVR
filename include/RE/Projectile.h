@@ -61,9 +61,9 @@ namespace RE
 		virtual void		 Set3D(NiAVObject* a_object, bool a_queue3DTasks = true) override;		// 6C
 		virtual void		 MoveHavok(bool a_forceRec) override;									// 85 - { return; }
 		virtual void		 GetLinearVelocity(NiPoint3& a_velocity) const override;				// 86
-		virtual void		 Unk_8B(void) override;													// 8B
-		virtual Projectile*	 AsProjectile() override;												// 8F - { return this; }
-		virtual bool		 OnAddCellPerformQueueReference(TESObjectCELL& a_cell) const override;	// 90 - { return false; }
+		virtual void		 Unk_8C(void) override;													// 8C
+		virtual Projectile*	 AsProjectile() override;												// 90 - { return this; }
+		virtual bool		 OnAddCellPerformQueueReference(TESObjectCELL& a_cell) const override;	// 91 - { return false; }
 
 		// add
 		virtual void Unk_A2(void);					 // A2 - { return 0; }
