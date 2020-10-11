@@ -14,11 +14,13 @@
 
 namespace RE
 {
+	// NOTE: For all below functions, REL::Offset will apply the baseaddr offset so no need to apply it twice
+
 	void TESForm::AddCompileIndex(FormID& a_id, TESFile* a_file)
 	{
 		using func_t = decltype(&TESForm::AddCompileIndex);
 		//		REL::Offset<func_t> func = REL::ID(14509);   // VR is 1a5510
-		REL::Offset<func_t> func = REL::Module::BaseAddr() + 0x1a5510;
+		REL::Offset<func_t> func = 0x1a5510;
 		return func(a_id, a_file);
 	}
 
@@ -26,10 +28,10 @@ namespace RE
 	std::pair<BSTHashMap<FormID, TESForm*>*, std::reference_wrapper<BSReadWriteLock>> TESForm::GetAllForms()
 	{
 		//		REL::Offset<BSTHashMap<FormID, TESForm*>**> allForms = REL::ID(514351);   // SE is 1ec3cb8   VR is 1f88b18
-		REL::Offset<BSTHashMap<FormID, TESForm*>**> allForms = REL::Module::BaseAddr() + 0x1f88b18;
+		REL::Offset<BSTHashMap<FormID, TESForm*>**> allForms = 0x1f88b18;
 
 		//		REL::Offset<BSReadWriteLock*> allFormsMapLock = REL::ID(514360);          // SE is 1ec4150   VR is 1f88fb0
-		REL::Offset<BSReadWriteLock*> allFormsMapLock = REL::Module::BaseAddr() + 0x1f88fb0;
+		REL::Offset<BSReadWriteLock*> allFormsMapLock = 0x1f88fb0;
 		return std::make_pair(*allForms, std::ref(*allFormsMapLock));
 	}
 
@@ -37,10 +39,10 @@ namespace RE
 	std::pair<BSTHashMap<BSFixedString, TESForm*>*, std::reference_wrapper<BSReadWriteLock>> TESForm::GetAllFormsByEditorID()
 	{
 		// REL::Offset<BSTHashMap<BSFixedString, TESForm*>**> allFormsByEditorID = REL::ID(514352);  // SSE is 1ec3cc0 VR is 1f88b20
-		REL::Offset<BSTHashMap<BSFixedString, TESForm*>**> allFormsByEditorID = REL::Module::BaseAddr() + 0x1f88b20;
+		REL::Offset<BSTHashMap<BSFixedString, TESForm*>**> allFormsByEditorID = 0x1f88b20;
 		
 		//  REL::Offset<BSReadWriteLock*> allFormsEditorIDMapLock = REL::ID(514361);   // SSE is 1ec4158  VR is 1f88fb8
-		REL::Offset<BSReadWriteLock*> allFormsEditorIDMapLock = REL::Module::BaseAddr() + 0x1f88fb8;
+		REL::Offset<BSReadWriteLock*> allFormsEditorIDMapLock = 0x1f88fb8;
 		
 		return std::make_pair(*allFormsByEditorID, std::ref(*allFormsEditorIDMapLock));
 	}
