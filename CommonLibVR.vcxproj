@@ -53,7 +53,6 @@
     <LinkIncremental>false</LinkIncremental>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <CodeAnalysisRuleSet>CommonLibCore.ruleset</CodeAnalysisRuleSet>
-    <IncludePath>C:\Users\rolli\source\repos\sksevr\src;$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -138,7 +137,7 @@
       <UndefinePreprocessorDefinitions>%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
       <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/experimental:external /external:anglebrackets /external:W0 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/experimental:external /external:anglebrackets /external:I "$(SolutionDir)/sksevr" /external:W0 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
