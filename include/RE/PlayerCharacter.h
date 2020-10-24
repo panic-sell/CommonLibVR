@@ -295,7 +295,7 @@ namespace RE
 		NiPointer<NiNode>                                          SnapWalkOffsetNode;                            // 410
 		NiPointer<NiNode>                                          RoomNode;                                      // 418
 		NiPointer<NiNode>                                          BlackSphere;                                   // 420
-		NiPointer<NiNode>                                          unkNode428;                                    // 428
+		NiPointer<NiNode>                                          uiNode;                                        // 428
 		NiPointer<BSTriShape>                                      InWorldUIQuadGeo;                              // 430
 		NiPointer<NiNode>                                          UIPointerNode;                                 // 438
 		NiPointer<BSTriShape>                                      UIPointerGeo;                                  // 440

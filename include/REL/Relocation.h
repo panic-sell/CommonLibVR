@@ -815,6 +815,9 @@ namespace REL
 			_address(Module::BaseAddr() + a_offset)
 		{}
 
+		constexpr Offset(std::uintptr_t a_offset, std::size_t a_mod) noexcept :
+			_address(Module::BaseAddr() + a_offset + a_mod)
+		{}
 
 		Offset(ID a_id) :
 			Offset(a_id.GetAddress())
