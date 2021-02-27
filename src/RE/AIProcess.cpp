@@ -20,6 +20,10 @@ namespace RE
 		return middleHigh ? middleHigh->charController.get() : nullptr;
 	}
 
+	ActorHandle AIProcess::GetCommandingActor() const
+	{
+		return middleHigh ? middleHigh->commandingActor : ActorHandle{};
+	}
 
 	TESForm* AIProcess::GetEquippedLeftHand()
 	{
