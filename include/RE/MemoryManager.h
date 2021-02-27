@@ -42,6 +42,14 @@ namespace RE
 		ScrapHeap* GetThreadScrapHeap();
 		void*	   Reallocate(void* a_ptr, std::size_t a_newSize, SInt32 a_alignment, bool a_aligned);
 
+		void RegisterMemoryManager()
+		{
+			using func_t = decltype(&MemoryManager::RegisterMemoryManager);
+		//	REL::Relocation<func_t> func{ REL::ID(35199) };
+		    REL::Offset<func_t> func(0x5a2800);
+			return func(this);
+		}
+
 
 		// members
 		bool					initialized;						// 000
