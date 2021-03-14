@@ -92,32 +92,34 @@ namespace RE
 				virtual void					   SetCallableFromTasklets1(const char* a_className, const char* a_stateName, const char* a_fnName, bool a_callable) override;																		// 19
 				virtual void					   SetCallableFromTasklets2(const char* a_className, const char* a_fnName, bool a_callable) override;																								// 1A - { SetCallableFromTasklets1(a_className, 0, a_fnName, a_callable); }
 				virtual void					   ForEachBoundObject(VMHandle a_handle, IForEachScriptObjectFunctor* a_functor) override;																											// 1B
-				virtual bool					   FindBoundObject(VMHandle a_handle, const char* a_className, BSTSmartPointer<Object>& a_result) const override;																					// 1C
-				virtual void					   MoveBoundObjects(VMHandle a_from, VMHandle a_to) override;																																		// 1D
-				virtual void					   ResetAllBoundObjects(VMHandle a_handle) override;																																				// 1E
-				virtual bool					   CastObject(const BSTSmartPointer<Object>& a_fromObjPtr, const BSTSmartPointer<ObjectTypeInfo>& a_toTypeInfoPtr, BSTSmartPointer<Object>& a_toObjPtr) override;									// 1F
-				virtual bool					   SetPropertyValue(BSTSmartPointer<Object>& a_obj, const char* a_propertyName, Variable& a_setVal) override;																						// 20
-				virtual bool					   GetPropertyValue(BSTSmartPointer<Object>& a_obj, const char* a_propertyName, Variable& a_getVal) override;																						// 21
-				virtual bool					   GetVariableValue1(const BSTSmartPointer<Object>& a_objPtr, UInt32 a_index, Variable& a_out) const override;																						// 22
-				virtual bool					   GetVariableValue2(VMHandle a_handle, const BSFixedString& a_className, SInt32 a_variableIndex, Variable& a_out) const override;																	// 23
-				virtual void					   SendEvent(VMHandle a_handle, const BSFixedString& a_eventName, IFunctionArguments* a_args) override;																								// 24
-				virtual void					   SendEventAll(const BSFixedString& a_eventName, IFunctionArguments* a_args) override;																												// 25
-				virtual bool					   DispatchStaticCall(const BSFixedString& a_className, const BSFixedString& a_fnName, IFunctionArguments* a_args, BSTSmartPointer<IStackCallbackFunctor>& a_result) override;						// 26
-				virtual bool					   DispatchMethodCall1(BSTSmartPointer<Object>& a_obj, const BSFixedString& a_fnName, IFunctionArguments* a_args, BSTSmartPointer<IStackCallbackFunctor>& a_result) override;						// 27
-				virtual bool					   DispatchMethodCall2(VMHandle a_handle, const BSFixedString& a_className, const BSFixedString& a_fnName, IFunctionArguments* a_args, BSTSmartPointer<IStackCallbackFunctor>& a_result) override;	// 28
-				virtual bool					   DispatchUnboundMethodCall(void) override;																																						// 29
-				virtual bool					   IsWaitingOnLatent(VMStackID a_stackID) const override;																																			// 2A
-				virtual void					   ReturnFromLatent(VMStackID a_stackID, const Variable& a_val) override;																															// 2B
-				virtual ErrorLogger*			   GetErrorLogger() override;																																										// 2C - { return errorLogger; }
-				virtual IObjectHandlePolicy*	   GetObjectHandlePolicy1() override;																																								// 2D - { return handlePolicy; }
-				virtual const IObjectHandlePolicy* GetObjectHandlePolicy2() const override;																																							// 2E - { return handlePolicy; }
-				virtual ObjectBindPolicy*		   GetObjectBindPolicy1() override;																																									// 2F - { return objectBindPolicy; }
-				virtual const ObjectBindPolicy*	   GetObjectBindPolicy2() const override;																																							// 30 - { return objectBindPolicy; }
-				virtual ISavePatcherInterface*	   GetSavePatcherInterface() override;																																								// 31 - { return savePatcherInterface; }
-				virtual void					   RegisterForLogEvent(BSTEventSink<LogEvent>* a_sink) override;																																	// 32
-				virtual void					   UnregisterForLogEvent(BSTEventSink<LogEvent>* a_sink) override;																																	// 33
-				virtual void					   RegisterForStatsEvent(BSTEventSink<StatsEvent>* a_sink) override;																																// 34
-				virtual void					   UnregisterForStatsEvent(BSTEventSink<StatsEvent>* a_sink) override;																																// 35
+				virtual void					   New_1C(void) override;	// added in VR 1.4.15
+				virtual void					   New_1D(void) override;	// added in VR 1.4.15
+				virtual bool					   FindBoundObject(VMHandle a_handle, const char* a_className, BSTSmartPointer<Object>& a_result) const override;																					// 1E
+				virtual void					   MoveBoundObjects(VMHandle a_from, VMHandle a_to) override;																																		// 1F
+				virtual void					   ResetAllBoundObjects(VMHandle a_handle) override;																																				// 20
+				virtual bool					   CastObject(const BSTSmartPointer<Object>& a_fromObjPtr, const BSTSmartPointer<ObjectTypeInfo>& a_toTypeInfoPtr, BSTSmartPointer<Object>& a_toObjPtr) override;									// 21
+				virtual bool					   SetPropertyValue(BSTSmartPointer<Object>& a_obj, const char* a_propertyName, Variable& a_setVal) override;																						// 22
+				virtual bool					   GetPropertyValue(BSTSmartPointer<Object>& a_obj, const char* a_propertyName, Variable& a_getVal) override;																						// 23
+				virtual bool					   GetVariableValue1(const BSTSmartPointer<Object>& a_objPtr, UInt32 a_index, Variable& a_out) const override;																						// 24
+				virtual bool					   GetVariableValue2(VMHandle a_handle, const BSFixedString& a_className, SInt32 a_variableIndex, Variable& a_out) const override;																	// 25
+				virtual void					   SendEvent(VMHandle a_handle, const BSFixedString& a_eventName, IFunctionArguments* a_args) override;																								// 26
+				virtual void					   SendEventAll(const BSFixedString& a_eventName, IFunctionArguments* a_args) override;																												// 27
+				virtual bool					   DispatchStaticCall(const BSFixedString& a_className, const BSFixedString& a_fnName, IFunctionArguments* a_args, BSTSmartPointer<IStackCallbackFunctor>& a_result) override;						// 28
+				virtual bool					   DispatchMethodCall1(BSTSmartPointer<Object>& a_obj, const BSFixedString& a_fnName, IFunctionArguments* a_args, BSTSmartPointer<IStackCallbackFunctor>& a_result) override;						// 29
+				virtual bool					   DispatchMethodCall2(VMHandle a_handle, const BSFixedString& a_className, const BSFixedString& a_fnName, IFunctionArguments* a_args, BSTSmartPointer<IStackCallbackFunctor>& a_result) override;	// 2A
+				virtual bool					   DispatchUnboundMethodCall(void) override;																																						// 2B
+				virtual bool					   IsWaitingOnLatent(VMStackID a_stackID) const override;																																			// 2C
+				virtual void					   ReturnFromLatent(VMStackID a_stackID, const Variable& a_val) override;																															// 2D
+				virtual ErrorLogger*			   GetErrorLogger() override;																																										// 2E - { return errorLogger; }
+				virtual IObjectHandlePolicy*	   GetObjectHandlePolicy1() override;																																								// 2F - { return handlePolicy; }
+				virtual const IObjectHandlePolicy* GetObjectHandlePolicy2() const override;																																							// 30 - { return handlePolicy; }
+				virtual ObjectBindPolicy*		   GetObjectBindPolicy1() override;																																									// 31 - { return objectBindPolicy; }
+				virtual const ObjectBindPolicy*	   GetObjectBindPolicy2() const override;																																							// 33 - { return objectBindPolicy; }
+				virtual ISavePatcherInterface*	   GetSavePatcherInterface() override;																																								// 34 - { return savePatcherInterface; }
+				virtual void					   RegisterForLogEvent(BSTEventSink<LogEvent>* a_sink) override;																																	// 35
+				virtual void					   UnregisterForLogEvent(BSTEventSink<LogEvent>* a_sink) override;																																	// 36
+				virtual void					   RegisterForStatsEvent(BSTEventSink<StatsEvent>* a_sink) override;																																// 37
+				virtual void					   UnregisterForStatsEvent(BSTEventSink<StatsEvent>* a_sink) override;																																// 38
 
 				// override (IVMObjectBindInterface)
 				virtual VMHandle GetBoundHandle(const BSTSmartPointer<Object>& a_objPtr) const override;															// 01
