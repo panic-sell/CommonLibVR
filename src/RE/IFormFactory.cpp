@@ -1,7 +1,7 @@
 #include "RE/IFormFactory.h"
 
 #include "REL/Relocation.h"
-
+#include "RE/Offsets.h"
 
 namespace RE
 {
@@ -12,8 +12,9 @@ namespace RE
 			IFormFactory* data[to_underlying(FormType::Max)];
 		};
 
-		REL::Offset<Factories*> formFactories = REL::ID(514355);
-		REL::Offset<bool*> formFactoriesInitialized = REL::ID(514349);
+		// Fix offsets for VR here - avoid using Addr DB
+		REL::Offset<Factories*> formFactories(Offset::FormFactory::FormFactories);
+		REL::Offset<bool*> formFactoriesInitialized(Offset::FormFactory::FormFactoriesInitialized);
 		return std::make_pair(formFactories->data, *formFactoriesInitialized);
 	}
 

@@ -341,7 +341,8 @@ namespace RE
 		namespace Console
 		{
 			// 48 8D 0D ? ? ? ? E8 ? ? ? ? 83 3D ? ? ? ? ? 74 13 48 8D 15 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 45 33 C9 45 33 C0 BA ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 44 24 ?
-			constexpr std::uintptr_t SelectedRef = 0x02F4C31C;		// 1_5_97
+			// NOTE: This is called "g_consoleHandle" in SKSEVR but it seems the type and ordering of the static var has changed quite a bit in the VR binary - hopefully this is correct. 
+			constexpr std::uintptr_t SelectedRef = 0x030115FC;		// VR 1_4_15
 			// IndirectSig: E8 ? ? ? ? BE 02 00 00 00 8B C6
 			constexpr std::uintptr_t SetSelectedRef = 0x008864D0;	// VR 1_4_15
 		}
@@ -1238,5 +1239,12 @@ namespace RE
 		constexpr std::uintptr_t RTDynamicCast = 0x0138BABA;			// VR 1_4_15
 		//
 		constexpr std::uintptr_t TlsIndex = 0x03497408;					// 1_5_97
+
+		namespace FormFactory
+		{
+			constexpr std::uintptr_t FormFactories = 0x1F88B40;			// VR 1_4_15
+
+			constexpr std::uintptr_t FormFactoriesInitialized = 0x1EC3CB3;	// VR 1_4_15	
+		}
 	}
 }
