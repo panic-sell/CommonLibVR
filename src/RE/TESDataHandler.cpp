@@ -30,11 +30,8 @@ namespace RE
 			return nullptr;
 		}
 
-		FormID formID = file->compileIndex << (3 * 8);
-		formID += file->smallFileCompileIndex << ((1 * 8) + 4);
-		formID += a_rawFormID;
-
-		return TESForm::LookupByID(formID);
+		// Use SkyrimVR lookup logic, ignore light plugin index which doesn't exist in VR
+		return TESForm::LookupByID(a_rawFormID & 0xFFFFFF | (file->compileIndex << 24));
 	}
 
 
