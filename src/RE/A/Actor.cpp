@@ -117,6 +117,13 @@ namespace RE
 		return worldSpace && worldSpace->HasMaxHeightData();
 	}
 
+	bool Actor::CanNavigateToPosition(const NiPoint3& a_pos, const NiPoint3& a_new_pos, float a_speed, float a_distance) const
+	{
+		using func_t = decltype(&Actor::CanNavigateToPosition);
+		REL::Relocation<func_t> func{ RELOCATION_ID(46050, 47314) };
+		return func(this, a_pos, a_new_pos, a_speed, a_distance);
+	}
+
 	bool Actor::CanOfferServices() const
 	{
 		const auto* vendorFac = GetVendorFaction();
@@ -739,6 +746,13 @@ namespace RE
 		using func_t = decltype(&Actor::RequestDetectionLevel);
 		REL::Relocation<func_t> func{ Offset::Actor::RequestDetectionLevel };
 		return func(this, a_target, a_priority);
+	}
+
+	std::int32_t Actor::RequestLOS(Actor* a_target, float a_viewCone)
+	{
+		using func_t = decltype(&Actor::RequestLOS);
+		REL::Relocation<func_t> func{ RELOCATION_ID(36752, 37768) };
+		return func(this, a_target, a_viewCone);
 	}
 
 	void Actor::SetRotationX(float a_angle)
