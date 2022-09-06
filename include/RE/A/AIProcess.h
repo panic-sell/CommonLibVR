@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RE/A/ActorPackage.h"
+#include "RE/B/BGSDefaultObjectManager.h"
 #include "RE/B/BSTArray.h"
 #include "RE/B/BSTList.h"
 
@@ -162,7 +163,7 @@ namespace RE
 		bool                    InLowProcess() const;
 		bool                    IsArrested() const;
 		bool                    IsGhost() const;
-		bool                    PlayIdle(Actor* attacker, DEFAULT_OBJECT smth, TESIdleForm* idle, bool a5, bool a6, Actor* target) const;
+		bool                    PlayIdle(Actor* a_attacker, DEFAULT_OBJECT a_smth, TESIdleForm* a_idle, bool a5, bool a6, Actor* a_target) const;
 		void                    SetArrested(bool a_arrested);
 		void                    SetCachedHeight(float a_height);
 		void                    SetHeadtrackTarget(Actor* a_owner, NiPoint3& a_targetPosition);
