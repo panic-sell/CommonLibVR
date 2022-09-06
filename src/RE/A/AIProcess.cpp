@@ -142,7 +142,7 @@ namespace RE
 		return cachedValues && cachedValues->flags.all(CachedValues::Flags::kActorIsGhost);
 	}
 
-    bool AIProcess::PlayIdle(Actor* attacker, DEFAULT_OBJECT smth, TESIdleForm* idle, bool a5, bool a6, Actor* target) const
+	bool AIProcess::PlayIdle(Actor* attacker, DEFAULT_OBJECT smth, TESIdleForm* idle, bool a5, bool a6, Actor* target) const
 	{
 		using func_t = decltype(&AIProcess::PlayIdle);
 		REL::Relocation<func_t> func{ RELOCATION_ID(38290, 39256) };
