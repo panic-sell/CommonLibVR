@@ -413,6 +413,13 @@ namespace RE
 		return base ? base->race : nullptr;
 	}
 
+	const float Actor::GetReach() const
+	{
+		using func_t = decltype(&Actor::GetReach);
+		REL::Relocation<func_t> func{ RELOCATION_ID(37588, 38538) };
+		return func(this);
+	}
+
 	bool Actor::GetRider(NiPointer<Actor>& a_outRider)
 	{
 		using func_t = decltype(&Actor::GetRider);

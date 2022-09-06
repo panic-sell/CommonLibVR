@@ -249,6 +249,7 @@ namespace RE
 		TESRace*                     GetRace();
 		TESNPC*                      GetRootFaceNPC();
 		[[nodiscard]] const TESNPC*  GetRootFaceNPC() const;
+		[[nodiscard]] const float    GetBaseScale() const;
 		[[nodiscard]] SEX            GetSex() const;
 		bool                         HasApplicableKeywordString(std::string_view a_editorID);
 		bool                         HasOverlays();
