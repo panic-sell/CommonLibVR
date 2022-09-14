@@ -310,8 +310,7 @@ namespace REL
 			noexcept(std::is_nothrow_invocable_v<F, First, Rest...>)
 		{
 			using result_t = std::invoke_result_t<F, First, Rest...>;
-			std::aligned_storage_t<sizeof(result_t), alignof(result_t)> result;
-
+			alignas(result_t) std::byte result[sizeof(result_t)];
 			using func_t = member_function_non_pod_type_t<F>;
 			auto func = stl::unrestricted_cast<func_t*>(std::forward<F>(a_func));
 
@@ -417,7 +416,7 @@ namespace REL
 		explicit constexpr Version(std::string_view a_version)
 		{
 			std::array<std::size_t, 4> powers{ 1, 1, 1, 1 };
-			std::size_t position = 0;
+			std::size_t                position = 0;
 			for (std::size_t i = 0; i < a_version.size(); ++i) {
 				if (a_version[i] == '.') {
 					if (++position == powers.size()) {
@@ -531,7 +530,8 @@ namespace REL
 		namespace detail
 		{
 			template <std::size_t Index, char C>
-			constexpr uint8_t read_version(std::array<typename REL::Version::value_type, 4>& result) {
+			constexpr uint8_t read_version(std::array<typename REL::Version::value_type, 4>& result)
+			{
 				static_assert(C >= '0' && C <= '9', "Invalid character in semantic version literal.");
 				static_assert(Index < 4, "Too many components in semantic version literal.");
 				result[Index] += (C - '0');
@@ -539,8 +539,8 @@ namespace REL
 			}
 
 			template <std::size_t Index, char C, char... Rest>
-				requires (sizeof...(Rest) > 0)
-			constexpr uint8_t read_version(std::array<typename REL::Version::value_type, 4>& result) {
+			requires(sizeof...(Rest) > 0) constexpr uint8_t read_version(std::array<typename REL::Version::value_type, 4>& result)
+			{
 				static_assert(C == '.' || (C >= '0' && C <= '9'), "Invalid character in semantic version literal.");
 				static_assert(Index < 4, "Too many components in semantic version literal.");
 				if constexpr (C == '.') {
@@ -555,13 +555,15 @@ namespace REL
 		}
 
 		template <char... C>
-		[[nodiscard]] constexpr REL::Version operator ""_v() noexcept {
-			std::array<typename REL::Version::value_type, 4> result{0, 0, 0, 0};
+		[[nodiscard]] constexpr REL::Version operator""_v() noexcept
+		{
+			std::array<typename REL::Version::value_type, 4> result{ 0, 0, 0, 0 };
 			detail::read_version<0, C...>(result);
 			return REL::Version(result);
 		}
 
-		[[nodiscard]] constexpr REL::Version operator ""_v(const char* str, std::size_t len) {
+		[[nodiscard]] constexpr REL::Version operator""_v(const char* str, std::size_t len)
+		{
 			return Version(std::string_view(str, len));
 		}
 	}
@@ -873,7 +875,8 @@ namespace REL
 				fmt::format(
 					"Failed to obtain file version info for: {}\n"
 					"Please contact the author of this script extender plugin for further assistance."sv,
-					stl::utf16_to_utf8(_filename).value_or("<unicode conversion error>"s)), a_failOnError);
+					stl::utf16_to_utf8(_filename).value_or("<unicode conversion error>"s)),
+				a_failOnError);
 		}
 
 		void clear();
@@ -1041,8 +1044,7 @@ namespace REL
 			bool failed = false;
 			if (it == _id2offset.end()) {
 				failed = true;
-			}
-			else if SKYRIM_REL_VR_CONSTEXPR (Module::IsVR()) {
+			} else if SKYRIM_REL_VR_CONSTEXPR (Module::IsVR()) {
 				if (it->id != a_id) {
 					failed = true;
 				}
@@ -1172,7 +1174,8 @@ namespace REL
 						"the game. Please continue to the mod page for address library to download "
 						"an appropriate version. If one is not available, then it is likely that "
 						"address library has not yet added support for this version of the game."sv,
-						stl::utf16_to_utf8(a_filename).value_or("<unknown filename>"s)), a_failOnError);
+						stl::utf16_to_utf8(a_filename).value_or("<unknown filename>"s)),
+					a_failOnError);
 				return false;
 			}
 			return true;
@@ -1209,7 +1212,8 @@ namespace REL
 			while (in.read_row(id, offset)) {
 				if (index >= address_count) {
 					return stl::report_and_error(fmt::format("VR Address Library {} tried to exceed {} allocated entries."sv,
-													 version, address_count), a_failOnError);
+													 version, address_count),
+						a_failOnError);
 				}
 				_id2offset[index++] = { static_cast<std::uint64_t>(id),
 					static_cast<std::uint64_t>(std::stoul(offset, nullptr, 16)) };
@@ -1217,7 +1221,8 @@ namespace REL
 			if (index != address_count) {
 				return stl::report_and_error(
 					fmt::format("VR Address Library {} loaded only {} entries but expected {}. Please redownload."sv,
-						version, index, address_count), a_failOnError);
+						version, index, address_count),
+					a_failOnError);
 			}
 			std::sort(
 				_id2offset.begin(),
@@ -1835,13 +1840,11 @@ namespace REL
 
 			template <char C1, char C2>
 			Hexadecimal<C1, C2> rule_for() noexcept
-				requires(characters::hexadecimal(C1) && characters::hexadecimal(C2))
-			;
+				requires(characters::hexadecimal(C1) && characters::hexadecimal(C2));
 
 			template <char C1, char C2>
 			Wildcard rule_for() noexcept
-				requires(characters::wildcard(C1) && characters::wildcard(C2))
-			;
+				requires(characters::wildcard(C1) && characters::wildcard(C2));
 		}
 
 		template <class... Rules>
