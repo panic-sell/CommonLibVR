@@ -269,6 +269,13 @@ namespace RE
 		return attackData->IsLeftAttack() ? proc->leftHand : proc->rightHand;
 	}
 
+	const float Actor::GetBoundRadius() const
+	{
+		using func_t = decltype(&Actor::GetBoundRadius);
+		REL::Relocation<func_t> func{ RELOCATION_ID(36444, 37439) };
+		return func(this);
+	}
+
 	bhkCharacterController* Actor::GetCharController() const
 	{
 		return currentProcess ? currentProcess->GetCharController() : nullptr;
