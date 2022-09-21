@@ -15,6 +15,7 @@ namespace RE
 		hkStringPtr() :
 			_data(nullptr) {}
 
+
 		// member types
 		using size_type = std::int32_t;
 
