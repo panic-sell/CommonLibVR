@@ -10,15 +10,11 @@ function Resolve-Files {
         $_generated = [System.Collections.ArrayList]::new(2048)
 
         try {
-            $Sources = Get-ChildItem "$PSScriptRoot" -Directory -ErrorAction SilentlyContinue 
-            foreach ($source in $Sources) {
-                Get-ChildItem "$source" -File -ErrorAction SilentlyContinue | Where-Object {
-                    ($_.Extension -eq '.h')
-                } | Resolve-Path -Relative | ForEach-Object {
-                    Write-Host "`t`t<$_>"
-                    $_generated.Add("`n#include `"RE/$($_.Substring(2) -replace '\\', '/')`"") | Out-Null
-                }
-            } 
+            Get-ChildItem "$PSScriptRoot" -Recurse -File -ErrorAction SilentlyContinue 
+            | Where-Object { ($_.Extension -eq '.h') } | Resolve-Path -Relative | ForEach-Object {
+                Write-Host "`t`t<$_>"
+                $_generated.Add("`n#include `"RE/$($_.Substring(2) -replace '\\', '/')`"") | Out-Null
+            }
         } finally {
             Pop-Location
         }
