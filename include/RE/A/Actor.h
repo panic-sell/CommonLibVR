@@ -314,13 +314,13 @@ namespace RE
 		void                   SetActionComplete(bool a_set) override;                                                        // 087
 		void                   Disable() override;                                                                            // 089
 		void                   ResetInventory(bool a_leveledOnly) override;                                                   // 08A
-		void                   Unk_8B(void) override;                                                                         // 08B
-		void                   Unk_8C(void) override;                                                                         // 08C
+		NiNode*                GetFireNode() override;                                                                        // 08B
+		void                   SetFireNode(NiNode* a_fireNode) override;                                                      // 08C
 		bool                   OnAddCellPerformQueueReference(TESObjectCELL& a_cell) const override;                          // 090
 		void                   DoMoveToHigh() override;                                                                       // 091
 		void                   TryMoveToMiddleLow() override;                                                                 // 092
 		bool                   TryChangeSkyCellActorsProcessLevel() override;                                                 // 093
-		void                   Unk_95(void) override;                                                                         // 095
+		void                   TryUpdateActorLastSeenTime() override;                                                         // 095
 		void                   Unk_96(void) override;                                                                         // 096
 		void                   SetParentCell(TESObjectCELL* a_cell) override;                                                 // 098
 		[[nodiscard]] bool     IsDead(bool a_notEssential = true) const override;                                             // 099
@@ -481,8 +481,8 @@ namespace RE
 		void                                    AllowPCDialogue(bool a_talk);
 		[[nodiscard]] bool                      CanAttackActor(Actor* a_actor);
 		[[nodiscard]] bool                      CanFlyHere() const;
-		[[nodiscard]] bool                      CanNavigateToPosition(const NiPoint3& a_pos, const NiPoint3& a_new_pos, float a_speed = 2.0f, float a_distance = 64.0f) const;
 		[[nodiscard]] bool                      CanOfferServices() const;
+		[[nodiscard]] bool                      CanNavigateToPosition(const NiPoint3& a_pos, const NiPoint3& a_new_pos, float a_speed = 2.0f, float a_distance = 64.0f) const;
 		[[nodiscard]] bool                      CanPickpocket() const;
 		[[nodiscard]] bool                      CanTalkToPlayer() const;
 		void                                    ClearArrested();
@@ -494,6 +494,7 @@ namespace RE
 		void                                    DispelWornItemEnchantments();
 		void                                    DoReset3D(bool a_updateWeight);
 		void                                    EnableAI(bool a_enable);
+		void                                    EndInterruptPackage(bool a_skipDialogue);
 		void                                    EvaluatePackage(bool a_immediate = false, bool a_resetAI = false);
 		[[nodiscard]] TESNPC*                   GetActorBase();
 		[[nodiscard]] const TESNPC*             GetActorBase() const;
@@ -507,6 +508,8 @@ namespace RE
 		[[nodiscard]] NiPointer<Actor>          GetCommandingActor() const;
 		[[nodiscard]] TESFaction*               GetCrimeFaction();
 		[[nodiscard]] const TESFaction*         GetCrimeFaction() const;
+		[[nodiscard]] TESPackage*               GetCurrentPackage();
+		[[nodiscard]] const TESPackage*         GetCurrentPackage() const;
 		[[nodiscard]] InventoryEntryData*       GetEquippedEntryData(bool a_leftHand) const;
 		[[nodiscard]] TESForm*                  GetEquippedObject(bool a_leftHand) const;
 		[[nodiscard]] std::int32_t              GetGoldAmount();
@@ -534,6 +537,7 @@ namespace RE
 		[[nodiscard]] bool                      HasSpell(SpellItem* a_spell) const;
 		void                                    InterruptCast(bool a_restoreMagicka) const;
 		[[nodiscard]] bool                      IsAIEnabled() const;
+		[[nodiscard]] bool                      IsAlarmed() const;
 		[[nodiscard]] bool                      IsAMount() const;
 		[[nodiscard]] bool                      IsAnimationDriven() const;
 		[[nodiscard]] bool                      IsBeingRidden() const;
@@ -546,13 +550,14 @@ namespace RE
 		[[nodiscard]] bool                      IsGuard() const;
 		[[nodiscard]] bool                      IsHostileToActor(Actor* a_actor);
 		[[nodiscard]] bool                      IsLimbGone(std::uint32_t a_limb);
-		[[nodiscard]] constexpr bool            IsInKillMove() const noexcept { return boolFlags.all(BOOL_FLAGS::kIsInKillMove); }
+		[[nodiscard]] constexpr bool            IsInKillMove() const noexcept { return GetActorRuntimeData().boolFlags.all(BOOL_FLAGS::kIsInKillMove); }
 		[[nodiscard]] bool                      IsInMidair() const;
 		[[nodiscard]] bool                      IsInRagdollState() const;
 		[[nodiscard]] bool                      IsOnMount() const;
 		[[nodiscard]] bool                      IsOverEncumbered() const;
 		[[nodiscard]] bool                      IsPlayerTeammate() const;
 		[[nodiscard]] float                     IsPointDeepUnderWater(float a_zPos, TESObjectCELL* a_cell);
+		[[nodiscard]] bool                      IsProtected() const;
 		[[nodiscard]] bool                      IsRunning() const;
 		[[nodiscard]] bool                      IsSneaking() const;
 		[[nodiscard]] bool                      IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, float a_waterLevel);
@@ -568,9 +573,11 @@ namespace RE
 		void                                    SetRotationZ(float a_angle);
 		void                                    SetLifeState(ACTOR_LIFE_STATE a_lifeState);
 		void                                    StealAlarm(TESObjectREFR* a_ref, TESForm* a_object, std::int32_t a_num, std::int32_t a_total, TESForm* a_owner, bool a_allowWarning);
+		void                                    StopAlarmOnActor();
 		void                                    StopInteractingQuick(bool a_unk02);
 		void                                    StopMoving(float a_delta);
 		void                                    SwitchRace(TESRace* a_race, bool a_player);
+		void                                    TrespassAlarm(TESObjectREFR* a_ref, TESForm* a_ownership, std::int32_t a_crime);
 		void                                    UpdateArmorAbility(TESForm* a_armor, ExtraDataList* a_extraData);
 		void                                    Update3DModel();
 		void                                    UpdateHairColor();
@@ -580,70 +587,93 @@ namespace RE
 		bool                                    VisitFactions(std::function<bool(TESFaction* a_faction, std::int8_t a_rank)> a_visitor);
 		bool                                    WouldBeStealing(const TESObjectREFR* a_target) const;
 
+		struct ACTOR_RUNTIME_DATA
+		{
+#define RUNTIME_DATA_CONTENT                                                                           \
+	stl::enumeration<BOOL_BITS, std::uint32_t>            boolBits;                          /* 0E0 */ \
+	float                                                 updateTargetTimer;                 /* 0E4 */ \
+	stl::enumeration<ACTOR_CRITICAL_STAGE, std::uint32_t> criticalStage;                     /* 0E8 */ \
+	std::uint32_t                                         pad0EC;                            /* 0EC */ \
+	AIProcess*                                            currentProcess;                    /* 0F0 */ \
+	ObjectRefHandle                                       dialogueItemTarget;                /* 0F8 */ \
+	ActorHandle                                           currentCombatTarget;               /* 0FC */ \
+	ActorHandle                                           myKiller;                          /* 100 */ \
+	float                                                 checkMyDeadBodyTimer;              /* 104 */ \
+	float                                                 voiceTimer;                        /* 108 */ \
+	float                                                 underWaterTimer;                   /* 10C */ \
+	std::int32_t                                          thiefCrimeStamp;                   /* 110 */ \
+	std::int32_t                                          actionValue;                       /* 114 */ \
+	float                                                 timerOnAction;                     /* 118 */ \
+	std::uint32_t                                         unk11C;                            /* 11C */ \
+	NiPoint3                                              editorLocCoord;                    /* 120 */ \
+	float                                                 editorLocRot;                      /* 12C */ \
+	TESForm*                                              editorLocForm;                     /* 130 */ \
+	BGSLocation*                                          editorLocation;                    /* 138 */ \
+	ActorMover*                                           actorMover;                        /* 140 */ \
+	BSTSmartPointer<MovementControllerNPC>                movementController;                /* 148 */ \
+	TESPackage*                                           unk150;                            /* 150 */ \
+	CombatController*                                     combatController;                  /* 158 */ \
+	TESFaction*                                           vendorFaction;                     /* 160 */ \
+	AITimeStamp                                           calculateVendorFactionTimer;       /* 168 */ \
+	EmotionType                                           emotionType;                       /* 16C */ \
+	std::uint32_t                                         emotionValue;                      /* 170 */ \
+	std::uint32_t                                         unk174;                            /* 174 */ \
+	std::uint32_t                                         unk178;                            /* 178 */ \
+	std::uint32_t                                         intimidateBribeDayStamp;           /* 17C */ \
+	std::uint64_t                                         unk180;                            /* 180 */ \
+	BSTSmallArray<SpellItem*>                             addedSpells;                       /* 188 */ \
+	ActorMagicCaster*                                     magicCasters[SlotTypes::kTotal];   /* 1A0 */ \
+	MagicItem*                                            selectedSpells[SlotTypes::kTotal]; /* 1C0 */ \
+	TESForm*                                              selectedPower;                     /* 1E0 */ \
+	std::uint32_t                                         unk1E8;                            /* 1E8 */ \
+	std::uint32_t                                         pad1EC;                            /* 1EC */ \
+	TESRace*                                              race;                              /* 1F0 */ \
+	float                                                 equippedWeight;                    /* 1F8 */ \
+	stl::enumeration<BOOL_FLAGS, std::uint32_t>           boolFlags;                         /* 1FC */ \
+	ActorValueStorage                                     avStorage;                         /* 200 */ \
+	BGSDialogueBranch*                                    exclusiveBranch;                   /* 220 */ \
+	Modifiers                                             healthModifiers;                   /* 228 */ \
+	Modifiers                                             magickaModifiers;                  /* 234 */ \
+	Modifiers                                             staminaModifiers;                  /* 240 */ \
+	Modifiers                                             voicePointsModifiers;              /* 24C */ \
+	float                                                 lastUpdate;                        /* 258 */ \
+	std::uint32_t                                         lastSeenTime;                      /* 25C */ \
+	BSTSmartPointer<BipedAnim>                            biped;                             /* 260 */ \
+	float                                                 armorRating;                       /* 268 */ \
+	float                                                 armorBaseFactorSum;                /* 26C */ \
+	std::int8_t                                           soundCallBackSet;                  /* 271 */ \
+	std::uint8_t                                          unk271;                            /* 270 */ \
+	std::uint8_t                                          unk272;                            /* 272 */ \
+	std::uint8_t                                          unk273;                            /* 273 */ \
+	std::uint32_t                                         unk274;                            /* 274 */ \
+	std::uint64_t                                         unk278;                            /* 278 */ \
+	std::uint64_t                                         unk280;                            /* 280 */ \
+	WinAPI::CRITICAL_SECTION                              unk288;                            /* 288 - havok related */
+
+			RUNTIME_DATA_CONTENT
+		};
+
+		[[nodiscard]] inline ACTOR_RUNTIME_DATA& GetActorRuntimeData() noexcept
+		{
+			return REL::RelocateMemberIfNewer<ACTOR_RUNTIME_DATA>(SKSE::RUNTIME_SSE_1_6_629, this, 0x88, 0x90);
+		}
+
+		[[nodiscard]] inline const ACTOR_RUNTIME_DATA& GetActorRuntimeData() const noexcept
+		{
+			return REL::RelocateMemberIfNewer<ACTOR_RUNTIME_DATA>(SKSE::RUNTIME_SSE_1_6_629, this, 0x88, 0x90);
+		}
+
 		// members
-		stl::enumeration<BOOL_BITS, std::uint32_t>            boolBits;                           // 0E0
-		float                                                 updateTargetTimer;                  // 0E4
-		stl::enumeration<ACTOR_CRITICAL_STAGE, std::uint32_t> criticalStage;                      // 0E8
-		std::uint32_t                                         pad0EC;                             // 0EC
-		AIProcess*                                            currentProcess;                     // 0F0
-		ObjectRefHandle                                       dialogueItemTarget;                 // 0F8
-		ActorHandle                                           currentCombatTarget;                // 0FC
-		ActorHandle                                           myKiller;                           // 100
-		float                                                 checkMyDeadBodyTimer;               // 104
-		float                                                 voiceTimer;                         // 108
-		float                                                 underWaterTimer;                    // 10C
-		std::int32_t                                          thiefCrimeStamp;                    // 110
-		std::int32_t                                          actionValue;                        // 114
-		float                                                 timerOnAction;                      // 118
-		std::uint32_t                                         unk11C;                             // 11C
-		NiPoint3                                              editorLocCoord;                     // 120
-		float                                                 editorLocRot;                       // 12C
-		TESForm*                                              editorLocForm;                      // 130
-		BGSLocation*                                          editorLocation;                     // 138
-		ActorMover*                                           actorMover;                         // 140
-		BSTSmartPointer<MovementControllerNPC>                movementController;                 // 148
-		void*                                                 unk150;                             // 150
-		CombatController*                                     combatController;                   // 158
-		TESFaction*                                           vendorFaction;                      // 160
-		AITimeStamp                                           calculateVendorFactionTimer;        // 168
-		EmotionType                                           emotionType;                        // 16C
-		std::uint32_t                                         emotionValue;                       // 170
-		std::uint32_t                                         unk174;                             // 174
-		std::uint32_t                                         unk178;                             // 178
-		std::uint32_t                                         intimidateBribeDayStamp;            // 17C
-		std::uint64_t                                         unk180;                             // 180
-		BSTSmallArray<SpellItem*>                             addedSpells;                        // 188
-		ActorMagicCaster*                                     magicCasters[SlotTypes::kTotal];    // 1A0
-		MagicItem*                                            selectedSpells[SlotTypes::kTotal];  // 1C0
-		TESForm*                                              selectedPower;                      // 1E0
-		std::uint32_t                                         unk1E8;                             // 1E8
-		std::uint32_t                                         pad1EC;                             // 1EC
-		TESRace*                                              race;                               // 1F0
-		float                                                 equippedWeight;                     // 1F8
-		stl::enumeration<BOOL_FLAGS, std::uint32_t>           boolFlags;                          // 1FC
-		ActorValueStorage                                     avStorage;                          // 200
-		BGSDialogueBranch*                                    exclusiveBranch;                    // 220
-		Modifiers                                             healthModifiers;                    // 228
-		Modifiers                                             magickaModifiers;                   // 234
-		Modifiers                                             staminaModifiers;                   // 240
-		Modifiers                                             voicePointsModifiers;               // 24C
-		float                                                 lastUpdate;                         // 258
-		std::uint32_t                                         lastSeenTime;                       // 25C
-		BSTSmartPointer<BipedAnim>                            biped;                              // 260
-		float                                                 armorRating;                        // 268
-		float                                                 armorBaseFactorSum;                 // 26C
-		std::int8_t                                           soundCallBackSet;                   // 271
-		std::uint8_t                                          unk271;                             // 270
-		std::uint8_t                                          unk272;                             // 272
-		std::uint8_t                                          unk273;                             // 273
-		std::uint32_t                                         unk274;                             // 274
-		std::uint64_t                                         unk278;                             // 278
-		std::uint64_t                                         unk280;                             // 280
-		WinAPI::CRITICAL_SECTION                              unk288;                             // 288 - havok related
+#ifndef ENABLE_SKYRIM_AE
+		RUNTIME_DATA_CONTENT
+#endif
 
 	private:
 		void        CalculateCurrentVendorFaction() const;
 		TESFaction* GetCrimeFactionImpl() const;
 	};
+#ifndef ENABLE_SKYRIM_AE
 	static_assert(sizeof(Actor) == 0x2B0);
+#endif
 }
+#undef RUNTIME_DATA_CONTENT
