@@ -2,6 +2,11 @@
 
 #include "SKSE/Impl/PCH.h"
 
+#include "RE/Offsets_NiRTTI.h" 
+#include "RE/Offsets_RTTI.h" 
+#include "RE/Offsets_VTABLE.h" 
+#include "RE/Offsets.h" 
+#include "RE/RTTI.h" 
 #include "RE/A/AbsorbEffect.h" 
 #include "RE/A/AbstractHeap.h" 
 #include "RE/A/ActionInput.h" 
