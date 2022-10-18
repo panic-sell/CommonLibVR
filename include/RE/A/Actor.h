@@ -562,6 +562,7 @@ namespace RE
 		[[nodiscard]] bool                      IsSneaking() const;
 		[[nodiscard]] bool                      IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, float a_waterLevel);
 		[[nodiscard]] bool                      IsSummoned() const noexcept;
+		[[nodiscard]] bool                      IsSummonedByPlayer() const noexcept;
 		[[nodiscard]] bool                      IsTrespassing() const;
 		void                                    KillImmediate();
 		void                                    RemoveAnimationGraphEventSink(BSTEventSink<BSAnimationGraphEvent>* a_sink) const;
