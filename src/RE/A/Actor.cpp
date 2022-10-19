@@ -117,13 +117,6 @@ namespace RE
 		return worldSpace && worldSpace->HasMaxHeightData();
 	}
 
-	bool Actor::CanNavigateToPosition(const NiPoint3& a_pos, const NiPoint3& a_new_pos, float a_speed, float a_distance) const
-	{
-		using func_t = decltype(&Actor::CanNavigateToPosition);
-		REL::Relocation<func_t> func{ RELOCATION_ID(46050, 47314) };
-		return func(this, a_pos, a_new_pos, a_speed, a_distance);
-	}
-
 	bool Actor::CanOfferServices() const
 	{
 		const auto* vendorFac = GetVendorFaction();
@@ -278,13 +271,6 @@ namespace RE
 		auto proc = _currentProcess->middleHigh;
 
 		return attackData->IsLeftAttack() ? proc->leftHand : proc->rightHand;
-	}
-
-	const float Actor::GetBoundRadius() const
-	{
-		using func_t = decltype(&Actor::GetBoundRadius);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36444, 37439) };
-		return func(this);
 	}
 
 	bhkCharacterController* Actor::GetCharController() const
@@ -460,13 +446,6 @@ namespace RE
 		return base ? base->race : nullptr;
 	}
 
-	const float Actor::GetReach() const
-	{
-		using func_t = decltype(&Actor::GetReach);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37588, 38538) };
-		return func(this);
-	}
-
 	bool Actor::GetRider(NiPointer<Actor>& a_outRider)
 	{
 		using func_t = decltype(&Actor::GetRider);
@@ -515,6 +494,13 @@ namespace RE
 			CalculateCurrentVendorFaction();
 		}
 		return _vendorFaction;
+	}
+
+	float Actor::GetWarmthRating() const
+	{
+		using func_t = decltype(&Actor::GetWarmthRating);
+		REL::Relocation<func_t> func{ RELOCATION_ID(25834, 26394) };
+		return func(this);
 	}
 
 	TESObjectARMO* Actor::GetWornArmor(BGSBipedObjectForm::BipedObjectSlot a_slot)
@@ -584,6 +570,13 @@ namespace RE
 		using func_t = decltype(&Actor::InterruptCast);
 		REL::Relocation<func_t> func{ RELOCATION_ID(37808, 38757) };
 		return func(this, a_restoreMagicka);
+	}
+
+	bool Actor::IsAttacking() const
+	{
+		using func_t = decltype(&Actor::IsAttacking);
+		REL::Relocation<func_t> func{ RELOCATION_ID(37637, 38590) };
+		return func(this);
 	}
 
 	bool Actor::IsAIEnabled() const
@@ -708,21 +701,6 @@ namespace RE
 		return GetActorRuntimeData().boolBits.all(BOOL_BITS::kPlayerTeammate);
 	}
 
-	float Actor::IsPointDeepUnderWater(float a_zPos, TESObjectCELL* a_cell)
-	{
-		auto waterHeight = !a_cell || a_cell == parentCell ? GetWaterHeight() : a_cell->GetExteriorWaterHeight();
-
-		if (waterHeight == -NI_INFINITY && a_cell) {
-			waterHeight = a_cell->GetExteriorWaterHeight();
-		}
-
-		if (waterHeight <= a_zPos) {
-			return 0.0f;
-		}
-
-		return std::fminf((waterHeight - a_zPos) / GetHeight(), 1.0f);
-	}
-
 	bool Actor::IsProtected() const
 	{
 		return GetActorRuntimeData().boolFlags.all(BOOL_FLAGS::kProtected);
@@ -737,11 +715,11 @@ namespace RE
 
 	bool Actor::IsSneaking() const
 	{
-		if (!ActorState::IsSneaking()) {
+		if (!AsActorState()->IsSneaking()) {
 			return false;
 		}
 
-		if (ActorState::IsSwimming()) {
+		if (AsActorState()->IsSwimming()) {
 			return false;
 		}
 
@@ -752,20 +730,10 @@ namespace RE
 		return true;
 	}
 
-	bool Actor::IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, const float a_waterLevel)
-	{
-		return IsPointDeepUnderWater(a_pos.z, a_cell) >= a_waterLevel;
-	}
-
 	bool Actor::IsSummoned() const noexcept
 	{
 		auto* _currentProcess = GetActorRuntimeData().currentProcess;
 		return _currentProcess && _currentProcess->GetIsSummonedCreature();
-	}
-
-	bool Actor::IsSummonedByPlayer() const noexcept
-	{
-		return IsSummoned() && GetCommandingActor().get() && GetCommandingActor().get()->IsPlayerRef();
 	}
 
 	bool Actor::IsTrespassing() const
@@ -778,13 +746,6 @@ namespace RE
 		using func_t = decltype(&Actor::KillImmediate);
 		REL::Relocation<func_t> func{ RELOCATION_ID(36723, 37735) };
 		return func(this);
-	}
-
-	std::int32_t Actor::RequestLOS(Actor* a_target, float a_viewCone)
-	{
-		using func_t = decltype(&Actor::RequestLOS);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36752, 37768) };
-		return func(this, a_target, a_viewCone);
 	}
 
 	void Actor::RemoveAnimationGraphEventSink(BSTEventSink<BSAnimationGraphEvent>* a_sink) const
