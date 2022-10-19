@@ -14,7 +14,7 @@ namespace RE
 
 		// members
 		std::int32_t level;  // 10
-		std::uint8_t unk14;  // 14
+		std::uint8_t hasLOS; // 14
 		std::uint8_t unk15;  // 15
 		std::uint8_t unk16;  // 16
 		std::uint8_t pad17;  // 17

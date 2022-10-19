@@ -13,6 +13,32 @@ namespace RE
 	class InventoryChanges
 	{
 	public:
+		struct ARMOR_SLOTS
+		{
+		public:
+			enum class ArmorSlot : std::uint32_t
+			{
+				kHead = 30,
+				kHair = 31,
+				kBody = 32,
+				kHands = 33,
+				kForearms = 34,
+				kAmulet = 35,
+				kRing = 36,
+				kFeet = 37,
+				kCalves = 38,
+				kShield = 39,
+				kTail = 40,
+				kLongHair = 41,
+				kCirclet = 42,
+				kEars = 43,
+				kDecapitateHead = 50,
+				kDecapitate = 51,
+				kFX01 = 61
+			};
+		};
+		using ArmorSlot = ARMOR_SLOTS::ArmorSlot;
+
 		class IItemChangeVisitor
 		{
 		public:
@@ -21,9 +47,9 @@ namespace RE
 			virtual ~IItemChangeVisitor();  // 00
 
 			// add
-			virtual bool Visit(InventoryEntryData* a_entryData) = 0;  // 01
-			virtual void Unk_02(void);                                // 02 - { return 1; }
-			virtual void Unk_03(void);                                // 03
+			virtual bool Visit(RE::InventoryEntryData* a_entryData) = 0;  // 01
+			virtual bool Unk_02(RE::FormType)  { return true; } // 02
+			virtual void Unk_03(RE::InventoryEntryData* a_entryData, std::int64_t, bool& a_visited) { a_visited = Visit(a_entryData); } // 03
 		};
 		static_assert(sizeof(IItemChangeVisitor) == 0x8);
 
@@ -31,10 +57,11 @@ namespace RE
 		explicit InventoryChanges(TESObjectREFR* a_ref);
 		~InventoryChanges();
 
+		void           Accept(IItemChangeVisitor* a_visitor);
 		void           AddEntryData(InventoryEntryData* a_entry);
-		TESObjectARMO* GetArmorInSlot(std::int32_t a_slot);
-		std::uint16_t  GetNextUniqueID();
-		std::uint32_t  GetWornMask();
+		[[nodiscard]] TESObjectARMO* GetArmorInSlot(ArmorSlot a_slot);
+		[[nodiscard]] std::uint16_t  GetNextUniqueID();
+		[[nodiscard]] std::uint32_t  GetWornMask();
 		void           InitFromContainerExtra();
 		void           InitLeveledItems();
 		void           InitScripts();

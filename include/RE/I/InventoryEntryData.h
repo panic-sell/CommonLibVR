@@ -54,6 +54,7 @@ namespace RE
 		[[nodiscard]] bool  IsLeveled() const;
 		[[nodiscard]] bool  IsPoisoned() const;
 		[[nodiscard]] bool  IsWorn() const;
+		[[nodiscard]] bool  IsWornLeft() const;
 
 		[[nodiscard]] bool IsOwnedBy(Actor* a_testOwner, bool a_defaultTo = true)
 		{

@@ -254,6 +254,13 @@ namespace RE
 		return func(this, a_modifier, a_value);
 	}
 
+	float Actor::GetAttackChance(Actor* a_targ, RE::BGSAttackData* a_atkData) const
+	{
+		using func_t = decltype(&Actor::GetAttackChance);
+		REL::Relocation<func_t> func{ RELOCATION_ID(49748, 50675) };
+		return func(this, a_targ, a_atkData);
+	}
+
 	InventoryEntryData* Actor::GetAttackingWeapon()
 	{
 		auto* _currentProcess = GetActorRuntimeData().currentProcess;
@@ -370,7 +377,7 @@ namespace RE
 			return 0;
 		}
 
-		const auto gold = dobj->GetObject<TESObjectMISC>(DefaultObjectID::kGold);
+		const auto gold = dobj->GetDefaultObject<TESObjectMISC>(DefaultObjectID::kGold);
 		const auto it = inv.find(*gold);
 		return it != inv.end() ? it->second.first : 0;
 	}
@@ -447,6 +454,11 @@ namespace RE
 		} else {
 			return {};
 		}
+	}
+
+	PROCESS_TYPE Actor::GetProcessLevel() const
+	{
+		return GetActorRuntimeData().currentProcess ? GetActorRuntimeData() .currentProcess->processLevel.get() : PROCESS_TYPE::kNone;
 	}
 
 	TESRace* Actor::GetRace() const
@@ -691,6 +703,12 @@ namespace RE
 		return func(this, a_limb);
 	}
 
+	bool Actor::IsInJumpState() const
+	{
+		bool result = false;
+		return GetGraphVariableBool("bInJumpState", result) && result;
+	}
+
 	bool Actor::IsInMidair() const
 	{
 		using func_t = decltype(&Actor::IsInMidair);
@@ -915,6 +933,13 @@ namespace RE
 		return func(this, a_armor, a_extraData);
 	}
 
+	bool Actor::Update3D()
+	{
+		using func_t = decltype(&Actor::Update3D);
+		static REL::Relocation<func_t> func{ RELOCATION_ID(19316, 19743) };
+		return func(this);
+	}
+
 	void Actor::Update3DModel()
 	{
 		auto* _currentProcess = GetActorRuntimeData().currentProcess;
@@ -940,6 +965,13 @@ namespace RE
 				}
 			}
 		}
+	}
+
+	bool Actor::UpdateNavPos(const NiPoint3& a_pos, const NiPoint3& a_new_pos, float a_speed, float a_distance) const
+	{
+		using func_t = decltype(&Actor::UpdateNavPos);
+		REL::Relocation<func_t> func{ RELOCATION_ID(46050, 47314) };
+		return func(this, a_pos, a_new_pos, a_speed, a_distance);
 	}
 
 	void Actor::UpdateSkinColor()

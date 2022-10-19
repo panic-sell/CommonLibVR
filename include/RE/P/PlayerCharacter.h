@@ -468,7 +468,7 @@ namespace RE
 		static PlayerCharacter* GetSingleton();
 
 		void                                   ActivatePickRef();
-		void                     AddPlayerAddItemEvent(TESObject* a_object, TESForm* a_owner, TESObjectREFR* a_container, AQUIRE_TYPE a_type);
+		void                     			   AddPlayerAddItemEvent(TESObject* a_object, TESForm* a_owner, TESObjectREFR* a_container, AQUIRE_TYPE a_type);
 		void                                   AddSkillExperience(ActorValue a_skill, float a_experience);
 		bool                                   AttemptPickpocket(TESObjectREFR* a_containerRef, InventoryEntryData* a_entry, std::int32_t a_number, bool a_fromContainer = true);
 		bool                                   CenterOnCell(const char* a_cellName);
@@ -484,9 +484,11 @@ namespace RE
 		[[nodiscard]] TintMask*                GetTintMask(std::uint32_t a_tintType, std::uint32_t a_index);
 		[[nodiscard]] bool HasActorDoingCommand() const;
 		[[nodiscard]] bool IsGrabbing() const;
+		[[nodiscard]] bool IsInGodMode() const;
 		void               PlayPickupEvent(TESForm* a_item, TESForm* a_containerOwner, TESObjectREFR* a_containerRef, EventType a_eventType);
 		void                     SetAIDriven(bool a_enable);
 		void                     SetEscaping(bool a_flag, bool a_escaped);
+		void                     SetGodMode(bool a_enable);
 		void                     StartGrabObject();
 
 		template <class T>

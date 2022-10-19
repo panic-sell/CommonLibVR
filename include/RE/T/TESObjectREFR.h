@@ -364,6 +364,7 @@ namespace RE
 		ObjectRefHandle                                 CreateRefHandle();
 		void                                            DoTrap(TrapData& a_data);
 		void                                            DoTrap(TrapEntry* a_trap, TargetEntry* a_target);
+		[[nodiscard]] std::optional<RE::NiPoint3>       FindNearestVertex(const float a_minimum_offset = 0.f);
 		[[nodiscard]] NiAVObject*                       Get3D() const;
 		[[nodiscard]] NiAVObject*                       Get3D(bool a_firstPerson) const;
 		[[nodiscard]] TESNPC*                           GetActorOwner();
@@ -440,6 +441,7 @@ namespace RE
         [[nodiscard]] float                             IsPointDeepUnderWater(float a_zPos, TESObjectCELL* a_cell) const;
         [[nodiscard]] bool                              IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, float a_waterLevel) const;
 		void                                            MoveTo(TESObjectREFR* a_target);
+		bool                                    		MoveToNearestNavmesh(const float a_minimum_offset = 0.f);
 		bool                                            MoveToNode(TESObjectREFR* a_target, const BSFixedString& a_nodeName);
 		bool                                            MoveToNode(TESObjectREFR* a_target, NiAVObject* a_node);
 		NiPointer<TESObjectREFR>                        PlaceObjectAtMe(TESBoundObject* a_baseToPlace, bool a_forcePersist) const;

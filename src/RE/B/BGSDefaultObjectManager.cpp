@@ -23,7 +23,7 @@ namespace RE
 		}
 	}
 
-	TESForm** BGSDefaultObjectManager::GetObject(DefaultObjectID a_object) noexcept
+	TESForm** BGSDefaultObjectManager::GetDefaultObject(DefaultObjectID a_object) noexcept
 	{
 		assert(stl::to_underlying(a_object) < Relocate(364, 364, 369));
 		auto idx = MapIndex(stl::to_underlying(a_object));
