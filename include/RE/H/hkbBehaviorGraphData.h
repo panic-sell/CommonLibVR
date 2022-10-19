@@ -5,15 +5,14 @@
 namespace RE
 {
 	class hkbVariableInfo;
-	struct hkbEventInfo;
 	class hkbVariableBounds;
 	class hkbVariableValueSet;
+	struct hkbEventInfo;
 
 	struct hkbEventInfo
 	{
 	public:
-		hkbEventInfo() :
-			m_flags(Flags(0)) {}
+		constexpr hkbEventInfo() : m_flags(Flags(0)) {}
 
 		/// Whether or not this event should be treated as a sync point.
 		bool isSyncPoint() { return (m_flags.get() & FLAG_SYNC_POINT) != 0; }
@@ -35,6 +34,7 @@ namespace RE
 		stl::enumeration<Flags, std::uint32_t> m_flags;
 	};
 	static_assert(sizeof(hkbEventInfo) == 0x4);
+
 
 	class hkbBehaviorGraphData : public hkReferencedObject
 	{

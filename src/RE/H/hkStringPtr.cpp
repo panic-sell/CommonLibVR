@@ -36,7 +36,7 @@ namespace RE
 	{
 		return size();
 	}
-
+	
 	void hkStringPtr::Ctor(const hkStringPtr& a_stringPtr, const char* a_data)
 	{
 		using func_t = decltype(&hkStringPtr::Ctor);

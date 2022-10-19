@@ -517,6 +517,13 @@ namespace RE
 		return _vendorFaction;
 	}
 
+	float Actor::GetWarmthRating() const
+	{
+		using func_t = decltype(&Actor::GetWarmthRating);
+		REL::Relocation<func_t> func{ RELOCATION_ID(25834, 26394) };
+		return func(this);
+	}
+
 	TESObjectARMO* Actor::GetWornArmor(BGSBipedObjectForm::BipedObjectSlot a_slot)
 	{
 		const auto inv = GetInventory([](TESBoundObject& a_object) {
@@ -584,6 +591,13 @@ namespace RE
 		using func_t = decltype(&Actor::InterruptCast);
 		REL::Relocation<func_t> func{ RELOCATION_ID(37808, 38757) };
 		return func(this, a_restoreMagicka);
+	}
+
+	bool Actor::IsAttacking() const
+	{
+		using func_t = decltype(&Actor::IsAttacking);
+		REL::Relocation<func_t> func{ RELOCATION_ID(37637, 38590) };
+		return func(this);
 	}
 
 	bool Actor::IsAIEnabled() const
@@ -737,11 +751,11 @@ namespace RE
 
 	bool Actor::IsSneaking() const
 	{
-		if (!ActorState::IsSneaking()) {
+		if (!AsActorState()->IsSneaking()) {
 			return false;
 		}
 
-		if (ActorState::IsSwimming()) {
+		if (AsActorState()->IsSwimming()) {
 			return false;
 		}
 
@@ -778,13 +792,6 @@ namespace RE
 		using func_t = decltype(&Actor::KillImmediate);
 		REL::Relocation<func_t> func{ RELOCATION_ID(36723, 37735) };
 		return func(this);
-	}
-
-	std::int32_t Actor::RequestLOS(Actor* a_target, float a_viewCone)
-	{
-		using func_t = decltype(&Actor::RequestLOS);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36752, 37768) };
-		return func(this, a_target, a_viewCone);
 	}
 
 	void Actor::RemoveAnimationGraphEventSink(BSTEventSink<BSAnimationGraphEvent>* a_sink) const
@@ -826,6 +833,13 @@ namespace RE
 		using func_t = decltype(&Actor::RequestDetectionLevel);
 		REL::Relocation<func_t> func{ Offset::Actor::RequestDetectionLevel };
 		return func(this, a_target, a_priority);
+	}
+
+	std::int32_t Actor::RequestLOS(Actor* a_target, float a_viewCone)
+	{
+		using func_t = decltype(&Actor::RequestLOS);
+		REL::Relocation<func_t> func{ RELOCATION_ID(36752, 37768) };
+		return func(this, a_target, a_viewCone);
 	}
 
 	void Actor::SetRotationX(float a_angle)

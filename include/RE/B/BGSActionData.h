@@ -22,7 +22,7 @@ namespace RE
 		uint64_t      unk38;           // 38
 		uint64_t      unk40;           // 40
 		uint64_t      unk48;           // 48
-		TESIdleForm*  IdleForm;        // 48
+		TESIdleForm*  IdleForm;        // 50
 		uint64_t      unk58;           // 58
 	};
 	static_assert(sizeof(BGSActionData) == 0x60);
