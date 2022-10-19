@@ -50,7 +50,7 @@ namespace RE
 		hkpShapeKey     GetFirstKey() const override;                                               // 02 - { return hkpListShape::getNextKey(hkpShapeKey(-1)); }
 		hkpShapeKey     GetNextKey(hkpShapeKey a_oldKey) const override;                            // 03
 		std::uint32_t   GetCollisionFilterInfo(hkpShapeKey a_key) const override;                   // 04
-		const hkpShape* GetChildShape(hkpShapeKey a_key, hkpShapeBuffer& a_buffer) const override;  // 05
+		hkpShape*		GetChildShape(hkpShapeKey a_key, hkpShapeBuffer& a_buffer) const override;  // 05
 
 		// members
 		hkArray<ChildInfo> childInfo;            // 30

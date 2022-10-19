@@ -17,7 +17,7 @@ namespace RE
 		std::int32_t    GetNumChildShapes() const override;                                         // 01 - { return 1; }
 		hkpShapeKey     GetFirstKey() const override;                                               // 02 - { return 0; }
 		hkpShapeKey     GetNextKey(hkpShapeKey oldKey) const override;                              // 03 - { return -1; }
-		const hkpShape* GetChildShape(hkpShapeKey a_key, hkpShapeBuffer& a_buffer) const override;  // 05 - { return childShape; }
+		hkpShape*		GetChildShape(hkpShapeKey a_key, hkpShapeBuffer& a_buffer) const override;  // 05 - { return childShape; }
 
 		// members
 		const hkpShape* childShape;  // 08
