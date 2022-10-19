@@ -35,7 +35,7 @@ namespace RE
 
 	private:
 		const char*                                 m_name;        // 00
-		const Item*                           m_items;       // 08
+		const Item*                                 m_items;       // 08
 		std::int32_t                                m_numItems;    // 10
 		std::int32_t                                pad14;         // 14
 		class hkCustomAttributes*                   m_attributes;  // 18

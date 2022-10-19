@@ -254,6 +254,13 @@ namespace RE
 		return func(this, a_modifier, a_value);
 	}
 
+	float Actor::GetAttackChance(Actor* a_targ, RE::BGSAttackData* a_atkData) const
+	{
+		using func_t = decltype(&Actor::GetAttackChance);
+		REL::Relocation<func_t> func{ RELOCATION_ID(49748, 50675) };
+		return func(this, a_targ, a_atkData);
+	}
+
 	InventoryEntryData* Actor::GetAttackingWeapon()
 	{
 		auto* _currentProcess = GetActorRuntimeData().currentProcess;
@@ -370,7 +377,7 @@ namespace RE
 			return 0;
 		}
 
-		const auto gold = dobj->GetObject<TESObjectMISC>(DefaultObjectID::kGold);
+		const auto gold = dobj->GetDefaultObject<TESObjectMISC>(DefaultObjectID::kGold);
 		const auto it = inv.find(*gold);
 		return it != inv.end() ? it->second.first : 0;
 	}
@@ -449,6 +456,11 @@ namespace RE
 		}
 	}
 
+	PROCESS_TYPE Actor::GetProcessLevel() const
+	{
+		return GetActorRuntimeData().currentProcess ? GetActorRuntimeData().currentProcess->processLevel.get() : PROCESS_TYPE::kNone;
+	}
+
 	TESRace* Actor::GetRace() const
 	{
 		auto* _race = GetActorRuntimeData().race;
@@ -515,6 +527,13 @@ namespace RE
 			CalculateCurrentVendorFaction();
 		}
 		return _vendorFaction;
+	}
+
+	float Actor::GetWarmthRating() const
+	{
+		using func_t = decltype(&Actor::GetWarmthRating);
+		REL::Relocation<func_t> func{ RELOCATION_ID(25834, 26394) };
+		return func(this);
 	}
 
 	TESObjectARMO* Actor::GetWornArmor(BGSBipedObjectForm::BipedObjectSlot a_slot)
@@ -584,6 +603,13 @@ namespace RE
 		using func_t = decltype(&Actor::InterruptCast);
 		REL::Relocation<func_t> func{ RELOCATION_ID(37808, 38757) };
 		return func(this, a_restoreMagicka);
+	}
+
+	bool Actor::IsAttacking() const
+	{
+		using func_t = decltype(&Actor::IsAttacking);
+		REL::Relocation<func_t> func{ RELOCATION_ID(37637, 38590) };
+		return func(this);
 	}
 
 	bool Actor::IsAIEnabled() const
@@ -677,6 +703,12 @@ namespace RE
 		return func(this, a_limb);
 	}
 
+	bool Actor::IsInJumpState() const
+	{
+		bool result = false;
+		return GetGraphVariableBool("bInJumpState", result) && result;
+	}
+
 	bool Actor::IsInMidair() const
 	{
 		using func_t = decltype(&Actor::IsInMidair);
@@ -737,11 +769,11 @@ namespace RE
 
 	bool Actor::IsSneaking() const
 	{
-		if (!ActorState::IsSneaking()) {
+		if (!AsActorState()->IsSneaking()) {
 			return false;
 		}
 
-		if (ActorState::IsSwimming()) {
+		if (AsActorState()->IsSwimming()) {
 			return false;
 		}
 
@@ -763,6 +795,11 @@ namespace RE
 		return _currentProcess && _currentProcess->GetIsSummonedCreature();
 	}
 
+	bool Actor::IsSummonedByPlayer() const noexcept
+	{
+		return IsSummoned() && GetCommandingActor().get() && GetCommandingActor().get()->IsPlayerRef();
+	}
+
 	bool Actor::IsTrespassing() const
 	{
 		return GetActorRuntimeData().boolFlags.all(BOOL_FLAGS::kIsTrespassing);
@@ -773,13 +810,6 @@ namespace RE
 		using func_t = decltype(&Actor::KillImmediate);
 		REL::Relocation<func_t> func{ RELOCATION_ID(36723, 37735) };
 		return func(this);
-	}
-
-	std::int32_t Actor::RequestLOS(Actor* a_target, float a_viewCone)
-	{
-		using func_t = decltype(&Actor::RequestLOS);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36752, 37768) };
-		return func(this, a_target, a_viewCone);
 	}
 
 	void Actor::RemoveAnimationGraphEventSink(BSTEventSink<BSAnimationGraphEvent>* a_sink) const
@@ -821,6 +851,13 @@ namespace RE
 		using func_t = decltype(&Actor::RequestDetectionLevel);
 		REL::Relocation<func_t> func{ Offset::Actor::RequestDetectionLevel };
 		return func(this, a_target, a_priority);
+	}
+
+	std::int32_t Actor::RequestLOS(Actor* a_target, float a_viewCone)
+	{
+		using func_t = decltype(&Actor::RequestLOS);
+		REL::Relocation<func_t> func{ RELOCATION_ID(36752, 37768) };
+		return func(this, a_target, a_viewCone);
 	}
 
 	void Actor::SetRotationX(float a_angle)
@@ -896,6 +933,13 @@ namespace RE
 		return func(this, a_armor, a_extraData);
 	}
 
+	bool Actor::Update3D()
+	{
+		using func_t = decltype(&Actor::Update3D);
+		static REL::Relocation<func_t> func{ RELOCATION_ID(19316, 19743) };
+		return func(this);
+	}
+
 	void Actor::Update3DModel()
 	{
 		auto* _currentProcess = GetActorRuntimeData().currentProcess;
@@ -921,6 +965,13 @@ namespace RE
 				}
 			}
 		}
+	}
+
+	bool Actor::UpdateNavPos(const NiPoint3& a_pos, const NiPoint3& a_new_pos, float a_speed, float a_distance) const
+	{
+		using func_t = decltype(&Actor::UpdateNavPos);
+		REL::Relocation<func_t> func{ RELOCATION_ID(46050, 47314) };
+		return func(this, a_pos, a_new_pos, a_speed, a_distance);
 	}
 
 	void Actor::UpdateSkinColor()

@@ -5,14 +5,14 @@
 namespace RE
 {
 	class hkbVariableInfo;
-	struct hkbEventInfo;
 	class hkbVariableBounds;
 	class hkbVariableValueSet;
+	struct hkbEventInfo;
 
 	struct hkbEventInfo
 	{
 	public:
-		hkbEventInfo() :
+		constexpr hkbEventInfo() :
 			m_flags(Flags(0)) {}
 
 		/// Whether or not this event should be treated as a sync point.

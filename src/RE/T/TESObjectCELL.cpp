@@ -11,7 +11,7 @@ namespace RE
 {
 	void TESObjectCELL::ForEachReference(std::function<BSContainer::ForEachResult(TESObjectREFR&)> a_callback) const
 	{
-		auto& runtimeData = GetRuntimeData();
+		auto&           runtimeData = GetRuntimeData();
 		BSSpinLockGuard locker(runtimeData.spinLock);
 		for (const auto& ref : runtimeData.references) {
 			if (ref && a_callback(*ref) == BSContainer::ForEachResult::kStop) {
@@ -26,8 +26,8 @@ namespace RE
 		ForEachReference([&](TESObjectREFR& ref) {
 			const auto distance = a_origin.GetSquaredDistance(ref.GetPosition());
 			return distance <= squaredRadius ?
-                       a_callback(ref) :
-                       BSContainer::ForEachResult::kContinue;
+			           a_callback(ref) :
+			           BSContainer::ForEachResult::kContinue;
 		});
 	}
 
@@ -35,6 +35,13 @@ namespace RE
 	{
 		auto owner = GetOwner();
 		return owner && owner->Is(FormType::NPC) ? static_cast<TESNPC*>(owner) : nullptr;
+	}
+
+	bhkWorld* TESObjectCELL::GetbhkWorld() const
+	{
+		using func_t = decltype(&TESObjectCELL::GetbhkWorld);
+		REL::Relocation<func_t> func{ RELOCATION_ID(18536, 18995) };
+		return func(this);
 	}
 
 	EXTERIOR_DATA* TESObjectCELL::GetCoordinates()
@@ -53,6 +60,13 @@ namespace RE
 		return IsInteriorCell() ? GetRuntimeData().cellData.interior : nullptr;
 	}
 
+	BGSLocation* TESObjectCELL::GetLocation() const
+	{
+		using func_t = decltype(&TESObjectCELL::GetLocation);
+		REL::Relocation<func_t> func{ RELOCATION_ID(18474, 18905) };
+		return func(this);
+	}
+
 	float TESObjectCELL::GetNorthRotation()
 	{
 		if (IsExteriorCell()) {
@@ -66,7 +80,7 @@ namespace RE
 	TESForm* TESObjectCELL::GetOwner()
 	{
 		auto& runtimeData = GetRuntimeData();
-		auto owner = extraList.GetOwner();
+		auto  owner = extraList.GetOwner();
 		if (owner) {
 			return owner;
 		}
@@ -118,6 +132,13 @@ namespace RE
 	bool TESObjectCELL::IsInteriorCell() const
 	{
 		return cellFlags.all(Flag::kIsInteriorCell);
+	}
+
+	BSTempEffectParticle* TESObjectCELL::PlaceParticleEffect(float a_lifetime, const char* a_modelName, const NiMatrix3& a_normal, const NiPoint3& a_pos, float a_scale, std::uint32_t a_flags, NiAVObject* a_target)
+	{
+		using func_t = decltype(&TESObjectCELL::PlaceParticleEffect);
+		REL::Relocation<func_t> func{ RELOCATION_ID(29219, 30072) };
+		return func(this, a_lifetime, a_modelName, a_normal, a_pos, a_scale, a_flags, a_target);
 	}
 
 	void TESObjectCELL::SetActorOwner(TESNPC* a_owner)

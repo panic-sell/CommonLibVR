@@ -10,6 +10,7 @@ namespace RE
 	{
 	public:
 		inline static constexpr auto RTTI = RTTI_BarrierProjectile;
+		inline static constexpr auto VTABLE = VTABLE_BarrierProjectile;
 		inline static constexpr auto FORMTYPE = FormType::ProjectileBarrier;
 
 		struct RecordFlags
@@ -37,10 +38,10 @@ namespace RE
 		void        InitHavok() override;                               // 66
 		NiAVObject* Load3D(bool a_backgroundLoading) override;          // 6A
 #ifndef SKYRIM_CROSS_VR
-		bool        IsBarrierProjectile() override;                              // A7 - { return 1; }
-		void        UpdateImpl(float a_delta) override;                 // AB
-		bool        ProcessImpacts() override;                              // AC
-		bool        GetKillOnCollision() override;                              // B8 - { return 0; }
+		bool IsBarrierProjectile() override;      // A7 - { return 1; }
+		void UpdateImpl(float a_delta) override;  // AB
+		bool ProcessImpacts() override;           // AC
+		bool GetKillOnCollision() override;       // B8 - { return 0; }
 #endif
 
 		struct BARRIER_RUNTIME_DATA

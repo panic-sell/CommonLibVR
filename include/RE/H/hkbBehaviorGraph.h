@@ -47,7 +47,7 @@ namespace RE
 		hkRefVariant                                 pseudoRandomGenerator;            // 078
 		hkRefPtr<hkbGenerator>                       rootGenerator;                    // 080
 		hkRefPtr<hkbBehaviorGraphData>               data;                             // 088
-		hkRefVariant                                 rootGeneratorClone;               // 090
+		void*                                        rootGeneratorClone;               // 090
 		NodeList*                                    activeNodes;                      // 098
 		hkRefVariant                                 activeNodeTemplateToIndexMap;     // 0A0
 		hkRefVariant                                 activeNodesChildrenIndices;       // 0A8

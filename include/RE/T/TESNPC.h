@@ -235,6 +235,7 @@ namespace RE
 		// override (BSTEventSink<MenuOpenCloseEvent>)
 		BSEventNotifyControl ProcessEvent(const MenuOpenCloseEvent* a_event, BSTEventSource<MenuOpenCloseEvent>* a_eventSource) override;  // 01
 
+		// add
 		bool                         AddPerk(BGSPerk* a_perk, std::int8_t a_rank);
 		void                         ChangeHeadPart(BGSHeadPart* a_target);
 		bool                         ContainsKeyword(std::string_view a_editorID);
