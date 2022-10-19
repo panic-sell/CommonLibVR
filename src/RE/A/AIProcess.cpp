@@ -156,6 +156,13 @@ namespace RE
 		return func(this, a_actor, a_location, a_magnitude);
 	}
 
+	bool AIProcess::PlayIdle(Actor* a_attacker, DEFAULT_OBJECT a_smth, TESIdleForm* a_idle, bool a5, bool a6, Actor* a_target) const
+	{
+		using func_t = decltype(&AIProcess::PlayIdle);
+		REL::Relocation<func_t> func{ RELOCATION_ID(38290, 39256) };
+		return func(this, a_attacker, a_smth, a_idle, a5, a6, a_target);
+	}
+
 	void AIProcess::SetActorsDetectionEvent(Actor* a_actor, const NiPoint3& a_location, std::int32_t a_soundLevel, TESObjectREFR* a_ref)
 	{
 		using func_t = decltype(&AIProcess::SetActorsDetectionEvent);

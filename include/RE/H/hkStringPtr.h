@@ -5,6 +5,15 @@ namespace RE
 	class hkStringPtr
 	{
 	public:
+		enum StringFlags
+		{
+			kManaged = 1 << 0
+		};
+
+		static hkStringPtr Create(const char* a_data);
+
+		constexpr hkStringPtr() : _data(nullptr) {}
+
 		// member types
 		using size_type = std::int32_t;
 
@@ -22,7 +31,8 @@ namespace RE
 		{
 			kManaged = 1 << 0
 		};
-
+		
+		static void Ctor(const hkStringPtr& a_stringPtr, const char* a_data);
 		const char* _data;  // 0
 	};
 	static_assert(sizeof(hkStringPtr) == 0x8);

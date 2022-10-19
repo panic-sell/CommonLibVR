@@ -304,7 +304,7 @@ namespace REL {
         decltype(auto) invoke_member_function_non_pod(F &&a_func, First &&a_first, Rest &&... a_rest)  //
         noexcept(std::is_nothrow_invocable_v<F, First, Rest...>) {
             using result_t = std::invoke_result_t<F, First, Rest...>;
-            std::aligned_storage_t<sizeof(result_t), alignof(result_t)> result;
+			alignas(result_t) std::byte result[sizeof(result_t)]{};
 
             using func_t = member_function_non_pod_type_t<F>;
             auto func = stl::unrestricted_cast<func_t *>(std::forward<F>(a_func));
@@ -751,12 +751,12 @@ namespace REL {
 
             return true;
         }
+#endif
 
         static void reset() {
             _initialized = false;
             _instance.clear();
         }
-#endif
 
         [[nodiscard]] std::uintptr_t base() const noexcept { return _base; }
 

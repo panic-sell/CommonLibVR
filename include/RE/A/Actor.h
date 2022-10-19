@@ -318,13 +318,13 @@ namespace RE
 		void                   SetActionComplete(bool a_set) override;                                                        // 087
 		void                   Disable() override;                                                                            // 089
 		void                   ResetInventory(bool a_leveledOnly) override;                                                   // 08A
-		NiNode*                 GetFireNode() override;                                                                         // 08B
-		void                    SetFireNode(NiNode* a_fireNode) override;                                                                         // 08C
+		NiNode*                GetFireNode() override;                                                                        // 08B
+		void                   SetFireNode(NiNode* a_fireNode) override;                                                      // 08C
 		bool                   OnAddCellPerformQueueReference(TESObjectCELL& a_cell) const override;                          // 090
 		void                   DoMoveToHigh() override;                                                                       // 091
 		void                   TryMoveToMiddleLow() override;                                                                 // 092
 		bool                   TryChangeSkyCellActorsProcessLevel() override;                                                 // 093
-		void                    TryUpdateActorLastSeenTime() override;                                                                         // 095
+		void                   TryUpdateActorLastSeenTime() override;                                                         // 095
 		void                   Unk_96(void) override;                                                                         // 096
 		void                   SetParentCell(TESObjectCELL* a_cell) override;                                                 // 098
 		[[nodiscard]] bool     IsDead(bool a_notEssential = true) const override;                                             // 099
@@ -487,6 +487,7 @@ namespace RE
 		void                                    AllowPCDialogue(bool a_talk);
 		[[nodiscard]] bool                      CanAttackActor(Actor* a_actor);
 		[[nodiscard]] bool                      CanFlyHere() const;
+		[[nodiscard]] bool                      CanNavigateToPosition(const NiPoint3& a_pos, const NiPoint3& a_new_pos, float a_speed = 2.0f, float a_distance = 64.0f) const;
 		[[nodiscard]] bool                      CanOfferServices() const;
 		[[nodiscard]] bool                      CanPickpocket() const;
 		[[nodiscard]] bool                      CanTalkToPlayer() const;
@@ -499,7 +500,7 @@ namespace RE
 		void                                    DispelWornItemEnchantments();
 		void                                    DoReset3D(bool a_updateWeight);
 		void                                    EnableAI(bool a_enable);
-		void                         EndInterruptPackage(bool a_skipDialogue);
+		void                         			EndInterruptPackage(bool a_skipDialogue);
 		void                                    EvaluatePackage(bool a_immediate = false, bool a_resetAI = false);
 		[[nodiscard]] TESNPC*                   GetActorBase();
 		[[nodiscard]] const TESNPC*             GetActorBase() const;
@@ -507,13 +508,14 @@ namespace RE
 		[[nodiscard]] float                     GetActorValueModifier(ACTOR_VALUE_MODIFIER a_modifier, ActorValue a_value) const;
 		[[nodiscard]] InventoryEntryData*       GetAttackingWeapon();
 		[[nodiscard]] const InventoryEntryData* GetAttackingWeapon() const;
+		[[nodiscard]] const float               GetBoundRadius() const;
 		[[nodiscard]] bhkCharacterController*   GetCharController() const;
-		uint32_t                  GetCollisionFilterInfo(uint32_t& a_outCollisionFilterInfo);
+		[[nodiscard]] uint32_t                  GetCollisionFilterInfo(uint32_t& a_outCollisionFilterInfo);
 		[[nodiscard]] NiPointer<Actor>          GetCommandingActor() const;
 		[[nodiscard]] TESFaction*               GetCrimeFaction();
 		[[nodiscard]] const TESFaction*         GetCrimeFaction() const;
-		[[nodiscard]] TESPackage*                  GetCurrentPackage();
-		[[nodiscard]] const TESPackage*            GetCurrentPackage() const;
+		[[nodiscard]] TESPackage*               GetCurrentPackage();
+		[[nodiscard]] const TESPackage*         GetCurrentPackage() const;
 		[[nodiscard]] InventoryEntryData*       GetEquippedEntryData(bool a_leftHand) const;
 		[[nodiscard]] TESForm*                  GetEquippedObject(bool a_leftHand) const;
 		[[nodiscard]] std::int32_t              GetGoldAmount();
@@ -526,6 +528,7 @@ namespace RE
 		[[nodiscard]] bool                      GetMountedBy(NiPointer<Actor>& a_outRider);
 		[[nodiscard]] ObjectRefHandle           GetOccupiedFurniture() const;
 		[[nodiscard]] TESRace*                  GetRace() const;
+		[[nodiscard]] const float               GetReach() const;
 		[[nodiscard]] bool                      GetRider(NiPointer<Actor>& a_outRider);
 		[[nodiscard]] TESObjectARMO*            GetSkin() const;
 		[[nodiscard]] TESObjectARMO*            GetSkin(BGSBipedObjectForm::BipedObjectSlot a_slot);
@@ -562,26 +565,28 @@ namespace RE
 		[[nodiscard]] bool                      IsOverEncumbered() const;
 		[[nodiscard]] bool                      IsPlayerTeammate() const;
 		[[nodiscard]] float                     IsPointDeepUnderWater(float a_zPos, TESObjectCELL* a_cell);
-		[[nodiscard]] bool                         IsProtected() const;
+		[[nodiscard]] bool                      IsProtected() const;
 		[[nodiscard]] bool                      IsRunning() const;
 		[[nodiscard]] bool                      IsSneaking() const;
 		[[nodiscard]] bool                      IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, float a_waterLevel);
 		[[nodiscard]] bool                      IsSummoned() const noexcept;
+		[[nodiscard]] bool                      IsSummonedByPlayer() const noexcept;
 		[[nodiscard]] bool                      IsTrespassing() const;
 		void                                    KillImmediate();
 		void                                    RemoveAnimationGraphEventSink(BSTEventSink<BSAnimationGraphEvent>* a_sink) const;
 		void                                    RemoveExtraArrows3D();
 		bool                                    RemoveSpell(SpellItem* a_spell);
 		[[nodiscard]] std::int32_t              RequestDetectionLevel(Actor* a_target, DETECTION_PRIORITY a_priority = DETECTION_PRIORITY::kNormal);
+		[[nodiscard]] std::int32_t              RequestLOS(Actor* a_target, float a_viewCone = 2.f * std::numbers::pi);
 		void                                    SetRotationX(float a_angle);
 		void                                    SetRotationZ(float a_angle);
 		void                                    SetLifeState(ACTOR_LIFE_STATE a_lifeState);
 		void                                    StealAlarm(TESObjectREFR* a_ref, TESForm* a_object, std::int32_t a_num, std::int32_t a_total, TESForm* a_owner, bool a_allowWarning);
-		void                         StopAlarmOnActor();
+		void                         			StopAlarmOnActor();
 		void                                    StopInteractingQuick(bool a_unk02);
 		void                                    StopMoving(float a_delta);
 		void                                    SwitchRace(TESRace* a_race, bool a_player);
-		void                         TrespassAlarm(TESObjectREFR* a_ref, TESForm* a_ownership, std::int32_t a_crime);
+		void                         			TrespassAlarm(TESObjectREFR* a_ref, TESForm* a_ownership, std::int32_t a_crime);
 		void                                    UpdateArmorAbility(TESForm* a_armor, ExtraDataList* a_extraData);
 		void                                    Update3DModel();
 		void                                    UpdateHairColor();

@@ -32,6 +32,7 @@
 #include <memory>
 #include <mutex>
 #include <new>
+#include <numbers>
 #include <numeric>
 #include <optional>
 #include <random>
