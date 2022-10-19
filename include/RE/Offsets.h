@@ -394,7 +394,7 @@ namespace RE::Offset
 	namespace SkyrimVM
 	{
 		constexpr auto QueuePostRenderCall = RELOCATION_ID(53144, 53955);
-        constexpr auto RelayEvent = RELOCATION_ID(53221, 54033);
+		constexpr auto RelayEvent = RELOCATION_ID(53221, 54033);
 		constexpr auto Singleton = RELOCATION_ID(514315, 400475);
 	}
 

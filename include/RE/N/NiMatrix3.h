@@ -24,7 +24,7 @@ namespace RE
 		NiMatrix3(float a_x, float a_y, float a_z);
 		NiMatrix3(const NiPoint3& a_x, const NiPoint3& a_y, const NiPoint3& a_z);
 
-		bool 	  Inverse(NiMatrix3& a_in) const;
+		bool      Inverse(NiMatrix3& a_in) const;
 		bool      ToEulerAnglesXYZ(NiPoint3& a_angle) const;
 		bool      ToEulerAnglesXYZ(float& a_xAngle, float& a_yAngle, float& a_zAngle) const;
 		void      EulerAnglesToAxesZXY(const NiPoint3& a_angle);

@@ -11,7 +11,7 @@ namespace RE
 {
 	void TESObjectCELL::ForEachReference(std::function<BSContainer::ForEachResult(TESObjectREFR&)> a_callback) const
 	{
-		auto& runtimeData = GetRuntimeData();
+		auto&           runtimeData = GetRuntimeData();
 		BSSpinLockGuard locker(runtimeData.spinLock);
 		for (const auto& ref : runtimeData.references) {
 			if (ref && a_callback(*ref) == BSContainer::ForEachResult::kStop) {
@@ -26,8 +26,8 @@ namespace RE
 		ForEachReference([&](TESObjectREFR& ref) {
 			const auto distance = a_origin.GetSquaredDistance(ref.GetPosition());
 			return distance <= squaredRadius ?
-                       a_callback(ref) :
-                       BSContainer::ForEachResult::kContinue;
+			           a_callback(ref) :
+			           BSContainer::ForEachResult::kContinue;
 		});
 	}
 
@@ -80,7 +80,7 @@ namespace RE
 	TESForm* TESObjectCELL::GetOwner()
 	{
 		auto& runtimeData = GetRuntimeData();
-		auto owner = extraList.GetOwner();
+		auto  owner = extraList.GetOwner();
 		if (owner) {
 			return owner;
 		}

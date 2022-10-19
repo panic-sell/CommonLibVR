@@ -12,7 +12,7 @@ namespace RE
 		inline static auto           EXTRADATATYPE = ExtraDataType::kWornLeft;
 
 		ExtraWornLeft() = default;
-		~ExtraWornLeft() = default; // 00
+		~ExtraWornLeft() = default;  // 00
 
 		// override (BSExtraData)
 		[[nodiscard]] ExtraDataType GetType() const override { return ExtraDataType::kWornLeft; };  // 01 - { return kWorn; }

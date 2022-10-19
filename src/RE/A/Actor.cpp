@@ -458,7 +458,7 @@ namespace RE
 
 	PROCESS_TYPE Actor::GetProcessLevel() const
 	{
-		return GetActorRuntimeData().currentProcess ? GetActorRuntimeData() .currentProcess->processLevel.get() : PROCESS_TYPE::kNone;
+		return GetActorRuntimeData().currentProcess ? GetActorRuntimeData().currentProcess->processLevel.get() : PROCESS_TYPE::kNone;
 	}
 
 	TESRace* Actor::GetRace() const

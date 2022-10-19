@@ -38,8 +38,8 @@ namespace RE
 			delete extraLists;
 			extraLists =
 				a_rhs.extraLists ?
-                    new BSSimpleList<ExtraDataList*>(*a_rhs.extraLists) :
-                    nullptr;
+					new BSSimpleList<ExtraDataList*>(*a_rhs.extraLists) :
+					nullptr;
 
 			countDelta = a_rhs.countDelta;
 		}
@@ -218,7 +218,7 @@ namespace RE
 
 		return false;
 	}
-	
+
 	bool InventoryEntryData::IsWornLeft() const
 	{
 		if (extraLists) {

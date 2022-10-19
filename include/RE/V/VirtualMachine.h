@@ -94,7 +94,7 @@ namespace RE
 				void New_1B(void) override;
 #endif
 #ifndef SKYRIM_CROSS_VR
-				void ForEachBoundObject(VMHandle a_handle, IForEachScriptObjectFunctor* a_functor) override;                                                         // 1B, 1C
+				void ForEachBoundObject(VMHandle a_handle, IForEachScriptObjectFunctor* a_functor) override;  // 1B, 1C
 #endif
 #if !defined(ENABLE_SKYRIM_AE) && !defined(ENABLE_SKYRIM_SE)
 				void New_1D(void) override;

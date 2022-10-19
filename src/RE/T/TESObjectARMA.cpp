@@ -65,7 +65,7 @@ namespace RE
 		std::uint32_t sex = npc ? static_cast<std::uint32_t>(npc->GetSex()) : 0;
 		sprintf_s(a_dstBuff, MAX_PATH, " (%08X)[%d]/ (%08X) [%2.0f%%]", GetFormID(), sex, a_armor->GetFormID(), weight);
 	}
-	
+
 	void TESObjectARMA::InitWornArmorAddon(TESObjectARMO* a_armor, BSTSmartPointer<BipedAnim>* a_biped, SEX a_sex)
 	{
 		using func_t = decltype(&TESObjectARMA::InitWornArmorAddon);

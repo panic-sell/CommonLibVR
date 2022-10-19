@@ -7,7 +7,6 @@ namespace RE
 	class MotionDataContainer
 	{
 	public:
-
 		// Translation
 		constexpr bool IsTranslationDataAligned() const
 		{
@@ -61,7 +60,6 @@ namespace RE
 		}
 
 	private:
-
 		// Translation
 		inline std::uintptr_t TranslationDataAligned() const
 		{
@@ -95,11 +93,10 @@ namespace RE
 		}
 
 	public:
-
 		// members
-		std::uintptr_t	translationDataPtr;		// 00
-		unsigned int	translationSegCount;	// 08
-		std::uintptr_t	rotationDataPtr;		// 10
-		unsigned int	rotationSegCount;		// 18
+		std::uintptr_t translationDataPtr;   // 00
+		unsigned int   translationSegCount;  // 08
+		std::uintptr_t rotationDataPtr;      // 10
+		unsigned int   rotationSegCount;     // 18
 	};
 }

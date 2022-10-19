@@ -59,7 +59,7 @@ namespace RE
 				return nullptr;
 			}
 			auto bipedSlot = (std::to_underlying(a_slot) - 30) >= 0 ? 1 << (std::to_underlying(a_slot) - 30) : 0;
-            return actor->GetWornArmor(static_cast<BGSBipedObjectForm::BipedObjectSlot>(bipedSlot));
+			return actor->GetWornArmor(static_cast<BGSBipedObjectForm::BipedObjectSlot>(bipedSlot));
 		} else {
 			using func_t = decltype(&InventoryChanges::GetArmorInSlot);
 			REL::Relocation<func_t> func{ RELOCATION_ID(15873, 16113) };

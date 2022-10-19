@@ -9,13 +9,13 @@ namespace RE
 	public:
 		struct DYNAMIC_TRISHAPE_RUNTIME_DATA
 		{
-#define RUNTIME_DATA_CONTENT             \
-	void*         dynamicData;  /* 00 */ \
-	BSSpinLock    lock;         /* 08 */ \
-	std::uint32_t dataSize;     /* 10 */ \
-	std::uint32_t frameCount;   /* 14 */ \
-	std::uint32_t unk178;       /* 18 */ \
-	std::uint32_t unk17C;       /* 1C */
+#define RUNTIME_DATA_CONTENT            \
+	void*         dynamicData; /* 00 */ \
+	BSSpinLock    lock;        /* 08 */ \
+	std::uint32_t dataSize;    /* 10 */ \
+	std::uint32_t frameCount;  /* 14 */ \
+	std::uint32_t unk178;      /* 18 */ \
+	std::uint32_t unk17C;      /* 1C */
 
 			RUNTIME_DATA_CONTENT
 		};

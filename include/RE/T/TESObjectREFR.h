@@ -438,10 +438,10 @@ namespace RE
 		[[nodiscard]] bool                              IsLocked() const;
 		[[nodiscard]] bool                              IsMarkedForDeletion() const;
 		[[nodiscard]] bool                              IsOffLimits();
-        [[nodiscard]] float                             IsPointDeepUnderWater(float a_zPos, TESObjectCELL* a_cell) const;
-        [[nodiscard]] bool                              IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, float a_waterLevel) const;
+		[[nodiscard]] float                             IsPointDeepUnderWater(float a_zPos, TESObjectCELL* a_cell) const;
+		[[nodiscard]] bool                              IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, float a_waterLevel) const;
 		void                                            MoveTo(TESObjectREFR* a_target);
-		bool                                    		MoveToNearestNavmesh(const float a_minimum_offset = 0.f);
+		bool                                            MoveToNearestNavmesh(const float a_minimum_offset = 0.f);
 		bool                                            MoveToNode(TESObjectREFR* a_target, const BSFixedString& a_nodeName);
 		bool                                            MoveToNode(TESObjectREFR* a_target, NiAVObject* a_node);
 		NiPointer<TESObjectREFR>                        PlaceObjectAtMe(TESBoundObject* a_baseToPlace, bool a_forcePersist) const;
@@ -477,10 +477,10 @@ namespace RE
 		}
 
 		// members
-		OBJ_REFR         data;          // 40
-		TESObjectCELL*   parentCell;    // 60
-		LOADED_REF_DATA* loadedData;    // 68
-		ExtraDataList    extraList;     // 70
+		OBJ_REFR         data;        // 40
+		TESObjectCELL*   parentCell;  // 60
+		LOADED_REF_DATA* loadedData;  // 68
+		ExtraDataList    extraList;   // 70
 
 #ifndef ENABLE_SKYRIM_AE
 		RUNTIME_DATA_CONTENT

@@ -20,7 +20,7 @@ namespace RE
 		~hkbCharacter() override;  // 00
 
 		// add
-		virtual void Unk_03(void);  															  // 03
+		virtual void Unk_03(void);                                                                // 03
 		virtual void GetNearbyCharacters(float maxDistance, hkArray<hkbCharacter*>& characters);  // 04
 
 		// members

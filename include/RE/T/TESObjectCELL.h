@@ -6,8 +6,8 @@
 #include "RE/B/BSPointerHandle.h"
 #include "RE/B/BSTArray.h"
 #include "RE/B/BSTHashMap.h"
-#include "RE/B/BSTempEffectParticle.h"
 #include "RE/B/BSTList.h"
+#include "RE/B/BSTempEffectParticle.h"
 #include "RE/C/Color.h"
 #include "RE/E/ExtraDataList.h"
 #include "RE/F/FormTypes.h"
@@ -192,31 +192,31 @@ namespace RE
 		[[nodiscard]] bool IsFormTypeChild(FormType a_type) override;                                            // 36
 
 		// add
-		void                         		ForEachReference(std::function<BSContainer::ForEachResult(TESObjectREFR&)> a_callback) const;
-		void                         		ForEachReferenceInRange(const NiPoint3& a_origin, float a_radius, std::function<BSContainer::ForEachResult(TESObjectREFR&)> a_callback) const;
-		[[nodiscard]] TESNPC*        		GetActorOwner();
-		[[nodiscard]] bhkWorld*      		GetbhkWorld() const;
-		[[nodiscard]] EXTERIOR_DATA* 		GetCoordinates();
-		[[nodiscard]] TESFaction*    		GetFactionOwner();
-		[[nodiscard]] INTERIOR_DATA* 		GetLighting();
-		[[nodiscard]] BGSLocation* 			GetLocation() const;
-		[[nodiscard]] float    				GetNorthRotation();
-		[[nodiscard]] TESForm* 				GetOwner();
-		[[nodiscard]] float    				GetExteriorWaterHeight() const;
-		bool                   				GetWaterHeight(const NiPoint3& a_pos, float& a_waterHeight);
-		[[nodiscard]] bool     				IsAttached() const;
-		[[nodiscard]] bool     				IsExteriorCell() const;
-		[[nodiscard]] bool     				IsInteriorCell() const;
+		void                                ForEachReference(std::function<BSContainer::ForEachResult(TESObjectREFR&)> a_callback) const;
+		void                                ForEachReferenceInRange(const NiPoint3& a_origin, float a_radius, std::function<BSContainer::ForEachResult(TESObjectREFR&)> a_callback) const;
+		[[nodiscard]] TESNPC*               GetActorOwner();
+		[[nodiscard]] bhkWorld*             GetbhkWorld() const;
+		[[nodiscard]] EXTERIOR_DATA*        GetCoordinates();
+		[[nodiscard]] TESFaction*           GetFactionOwner();
+		[[nodiscard]] INTERIOR_DATA*        GetLighting();
+		[[nodiscard]] BGSLocation*          GetLocation() const;
+		[[nodiscard]] float                 GetNorthRotation();
+		[[nodiscard]] TESForm*              GetOwner();
+		[[nodiscard]] float                 GetExteriorWaterHeight() const;
+		bool                                GetWaterHeight(const NiPoint3& a_pos, float& a_waterHeight);
+		[[nodiscard]] bool                  IsAttached() const;
+		[[nodiscard]] bool                  IsExteriorCell() const;
+		[[nodiscard]] bool                  IsInteriorCell() const;
 		[[nodiscard]] BSTempEffectParticle* PlaceParticleEffect(float a_lifetime, const char* a_modelName, const NiMatrix3& a_normal, const NiPoint3& a_pos, float a_scale, std::uint32_t a_flags, NiAVObject* a_target);
-		void                   				SetActorOwner(TESNPC* a_owner);
-		void                   				SetFactionOwner(TESFaction* a_owner);
-		void                   				SetFogColor(Color a_near, Color a_far);
-		void                   				SetFogPlanes(float a_near, float a_far);
-		void                   				SetFogPower(float a_power);
-		void                   				SetHandChanged(bool a_changed);
-		void                   				SetOwner(TESForm* a_owner);
-		void                   				SetPublic(bool a_public);
-		[[nodiscard]] bool     				UsesSkyLighting() const;
+		void                                SetActorOwner(TESNPC* a_owner);
+		void                                SetFactionOwner(TESFaction* a_owner);
+		void                                SetFogColor(Color a_near, Color a_far);
+		void                                SetFogPlanes(float a_near, float a_far);
+		void                                SetFogPower(float a_power);
+		void                                SetHandChanged(bool a_changed);
+		void                                SetOwner(TESForm* a_owner);
+		void                                SetPublic(bool a_public);
+		[[nodiscard]] bool                  UsesSkyLighting() const;
 
 		struct RUNTIME_DATA
 		{
@@ -251,15 +251,15 @@ namespace RE
 		}
 
 		// members
-		mutable BSSpinLock                                   grassCreateLock;   // 030
-		mutable BSSpinLock                                   grassTaskLock;     // 038
-		stl::enumeration<Flag, std::uint16_t>                cellFlags;         // 040
-		std::uint16_t                                        cellGameFlags;     // 042
-		stl::enumeration<CellState, std::uint8_t>            cellState;         // 044
-		bool                                                 autoWaterLoaded;   // 045
-		bool                                                 cellDetached;      // 046
-		std::uint8_t                                         pad047;            // 047
-		ExtraDataList                                        extraList;         // 048
+		mutable BSSpinLock                        grassCreateLock;  // 030
+		mutable BSSpinLock                        grassTaskLock;    // 038
+		stl::enumeration<Flag, std::uint16_t>     cellFlags;        // 040
+		std::uint16_t                             cellGameFlags;    // 042
+		stl::enumeration<CellState, std::uint8_t> cellState;        // 044
+		bool                                      autoWaterLoaded;  // 045
+		bool                                      cellDetached;     // 046
+		std::uint8_t                              pad047;           // 047
+		ExtraDataList                             extraList;        // 048
 
 #ifndef ENABLE_SKYRIM_AE
 		RUNTIME_DATA_CONTENT

@@ -58,7 +58,7 @@ namespace RE
 		REL::Relocation<func_t> func{ Offset::TESNPC::GetBaseOverlays };
 		return func(this);
 	}
-	
+
 	const float TESNPC::GetBaseScale() const
 	{
 		if (race) {

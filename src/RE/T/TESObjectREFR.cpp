@@ -736,7 +736,7 @@ namespace RE
 	bool TESObjectREFR::MoveToNearestNavmesh(const float a_minimum_offset)
 	{
 		auto nearestVertex = this->FindNearestVertex(a_minimum_offset);
-		if (!nearestVertex) 
+		if (!nearestVertex)
 			return false;
 
 		MoveTo_Impl(CreateRefHandle(), GetParentCell(), GetWorldspace(), std::move(*nearestVertex), GetAngle());

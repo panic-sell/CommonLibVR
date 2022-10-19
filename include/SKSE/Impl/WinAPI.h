@@ -63,10 +63,10 @@ namespace SKSE::WinAPI
 	using HINSTANCE = HINSTANCE__*;
 	using HMODULE = HINSTANCE;
 
-    struct HKEY__;
-    using HKEY = HKEY__*;
+	struct HKEY__;
+	using HKEY = HKEY__*;
 
-    inline auto HKEY_LOCAL_MACHINE = reinterpret_cast<HKEY>(static_cast<uintptr_t>(0x80000002));
+	inline auto HKEY_LOCAL_MACHINE = reinterpret_cast<HKEY>(static_cast<uintptr_t>(0x80000002));
 
 	struct _WIN32_FIND_DATAA
 	{
@@ -176,11 +176,11 @@ namespace SKSE::WinAPI
 	void OutputDebugString(
 		const wchar_t* a_outputString) noexcept;
 
-    long RegGetValueW(HKEY hkey, const char* subKey, const char* value, unsigned long flags, unsigned long* type,
-                         void* data, unsigned long* length);
+	long RegGetValueW(HKEY hkey, const char* subKey, const char* value, unsigned long flags, unsigned long* type,
+		void* data, unsigned long* length);
 
-    long RegGetValueW(HKEY hkey, const wchar_t* subKey, const wchar_t* value, unsigned long flags, unsigned long* type,
-                         void* data, unsigned long* length);
+	long RegGetValueW(HKEY hkey, const wchar_t* subKey, const wchar_t* value, unsigned long flags, unsigned long* type,
+		void* data, unsigned long* length);
 
 	[[noreturn]] void TerminateProcess(
 		void*        a_process,
