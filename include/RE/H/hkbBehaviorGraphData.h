@@ -1,13 +1,15 @@
 #pragma once
 
+#include "RE/H/hkArray.h"
+#include "RE/H/hkRefPtr.h"
+#include "RE/H/hkReferencedObject.h"
+#include "RE/H/hkStringPtr.h"
 #include "RE/H/hkbBehaviorGraphStringData.h"
+#include "RE/H/hkbVariableInfo.h"
+#include "RE/H/hkbVariableValueSet.h"
 
 namespace RE
 {
-	class hkbVariableInfo;
-	class hkbVariableBounds;
-	class hkbVariableValueSet;
-	struct hkbEventInfo;
 
 	struct hkbEventInfo
 	{
@@ -43,6 +45,8 @@ namespace RE
 
 		virtual ~hkbBehaviorGraphData() = default;  // 00
 
+		int AddIntVariable(hkStringPtr name, hkbVariableInfo::VariableType type, std::int32_t value);
+
 		// members
 		hkArray<float>                       attributeDefaults;       // 10
 		hkArray<hkbVariableInfo>             variableInfos;           // 20
@@ -55,4 +59,5 @@ namespace RE
 		hkRefPtr<hkbBehaviorGraphStringData> stringData;              // 78
 	};
 	static_assert(sizeof(hkbBehaviorGraphData) == 0x80);
+
 }

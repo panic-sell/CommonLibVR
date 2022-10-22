@@ -816,6 +816,8 @@
 #include "RE/H/hkbNodeInfo.h"
 #include "RE/H/hkbRagdollDriver.h"
 #include "RE/H/hkbStateMachine.h"
+#include "RE/H/hkbVariableInfo.h"
+#include "RE/H/hkbVariableValueSet.h"
 #include "RE/H/hkp3AxisSweep.h"
 #include "RE/H/hkpAction.h"
 #include "RE/H/hkpAgentNnTrack.h"
