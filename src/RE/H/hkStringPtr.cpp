@@ -5,8 +5,11 @@ namespace RE
 {
 	hkStringPtr hkStringPtr::Create(const char* a_data)
 	{
+		spdlog::default_logger()->debug("Create init");
 		auto stringPtr = hkStringPtr();
+		spdlog::default_logger()->debug("hkStringPtr() returned");
 		Ctor(stringPtr, a_data);
+		spdlog::default_logger()->debug("Create done");
 		return stringPtr;
 	}
 
@@ -37,10 +40,10 @@ namespace RE
 		return size();
 	}
 
-	void hkStringPtr::Ctor(const hkStringPtr& a_stringPtr, const char* a_data)
+	void hkStringPtr::Ctor(const hkStringPtr& a_stringPtr, const char* a_data, const std::uint32_t a_mask, bool a_mark)
 	{
 		using func_t = decltype(&hkStringPtr::Ctor);
 		REL::Relocation<func_t> func{ RELOCATION_ID(56806, 57236) };
-		return func(a_stringPtr, a_data);
+		return func(a_stringPtr, a_data, a_mask, a_mark);
 	}
 }

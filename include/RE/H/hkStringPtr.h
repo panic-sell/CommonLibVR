@@ -28,7 +28,7 @@ namespace RE
 		[[nodiscard]] size_type length() const;
 
 	protected:
-		static void Ctor(const hkStringPtr& a_stringPtr, const char* a_data);
+		static void Ctor(const hkStringPtr& a_stringPtr, const char* a_data, const std::uint32_t a_mask = 0xFFFFFFFF, bool a_mark = true);
 
 		const char* _data;  // 0
 	};
