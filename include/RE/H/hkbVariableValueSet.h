@@ -28,20 +28,9 @@ namespace RE
 	class hkbVariableValueSet : public hkReferencedObject
 	{
 	public:
-		hkbVariableValueSet() {}
-
-		int AddInt(std::int32_t value)
-		{
-			if (m_wordVariableValues.data()) {
-				hkbVariableValue integer;
-				integer.i = value;
-				int index = m_wordVariableValues.size();
-				m_wordVariableValues.push_back(integer);
-				return index;
-			}
-
-			return -1;
-		}
+		int AddBool(bool a_value);
+		int AddInt(std::int32_t a_value);
+		int AddFloat(float a_value);
 
 	private:
 		// The values of variables that fit into a word.  For all other variables, this array stores the index
