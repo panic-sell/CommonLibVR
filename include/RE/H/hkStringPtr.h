@@ -11,6 +11,7 @@ namespace RE
 		};
 
 		static hkStringPtr Create(const char* a_data);
+		static hkStringPtr Create(std::string a_data);
 
 		hkStringPtr() :
 			_data(nullptr) {}

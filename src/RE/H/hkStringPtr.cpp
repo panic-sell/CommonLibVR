@@ -10,6 +10,11 @@ namespace RE
 		return stringPtr;
 	}
 
+	hkStringPtr hkStringPtr::Create(std::string a_data)
+	{
+		return Create(a_data.c_str());
+	}
+
 	const char* hkStringPtr::data() const noexcept
 	{
 		return reinterpret_cast<const char*>(reinterpret_cast<std::uintptr_t>(_data) & ~kManaged);
