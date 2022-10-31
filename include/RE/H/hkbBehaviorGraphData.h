@@ -45,9 +45,13 @@ namespace RE
 
 		virtual ~hkbBehaviorGraphData() = default;  // 00
 
+		bool HasEventString(hkStringPtr a_name);
+		bool HasVariableString(hkStringPtr a_name);
+
 		int AddBoolVariable(hkStringPtr a_name, bool a_value);
 		int AddIntVariable(hkStringPtr a_name, std::int32_t a_value);
 		int AddFloatVariable(hkStringPtr a_name, float a_value);
+		int AddEvent(hkStringPtr a_name);
 
 		// members
 		hkArray<float>                       attributeDefaults;       // 10
