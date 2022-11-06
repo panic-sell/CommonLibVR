@@ -3,16 +3,12 @@
 
 namespace RE
 {
-	hkStringPtr hkStringPtr::Create(const char* a_data)
+	hkStringPtr::hkStringPtr(std::string_view a_data, const std::uint32_t a_mask, const bool a_mark) :
+		_data(nullptr)
 	{
-		auto stringPtr = hkStringPtr();
-		Ctor(stringPtr, a_data);
-		return stringPtr;
-	}
-
-	hkStringPtr hkStringPtr::Create(std::string a_data)
-	{
-		return Create(a_data.c_str());
+		using func_t = std::add_pointer_t<void(hkStringPtr&, const char*, std::uint32_t, bool)>;
+		REL::Relocation<func_t> func{ RELOCATION_ID(56806, 57236) };
+		func(*this, a_data.data(), a_mask, a_mark);
 	}
 
 	const char* hkStringPtr::data() const noexcept
@@ -40,12 +36,5 @@ namespace RE
 		-> size_type
 	{
 		return size();
-	}
-
-	void hkStringPtr::Ctor(const hkStringPtr& a_stringPtr, const char* a_data, const std::uint32_t a_mask, bool a_mark)
-	{
-		using func_t = decltype(&hkStringPtr::Ctor);
-		REL::Relocation<func_t> func{ RELOCATION_ID(56806, 57236) };
-		return func(a_stringPtr, a_data, a_mask, a_mark);
 	}
 }
