@@ -238,6 +238,7 @@
 #include "RE/B/BSInstanceTriShape.h"
 #include "RE/B/BSIntrusiveRefCounted.h"
 #include "RE/B/BSKeyboardDevice.h"
+#include "RE/B/BSLeafAnimNode.h"
 #include "RE/B/BSLensFlareRenderData.h"
 #include "RE/B/BSLight.h"
 #include "RE/B/BSLightingShaderMaterial.h"
