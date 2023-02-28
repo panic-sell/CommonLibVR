@@ -17,7 +17,7 @@ namespace RE
 		virtual bool           Process();      // 05 - { return false; }
 
 		// members
-		BSFixedString AnimationEvent;  // 08
+		BSFixedString AnimationEvent;  // 28
 		BSFixedString unk30;           // 30
 		uint64_t      unk38;           // 38
 		uint64_t      unk40;           // 40
