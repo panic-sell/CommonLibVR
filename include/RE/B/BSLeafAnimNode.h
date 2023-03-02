@@ -23,11 +23,11 @@ namespace RE
 		BSLeafAnimNode* AsLeafAnimNode() override;                          // 3F
 
 	private:
-		float unk158;    //158	relate with camera position.
-		float unk15C;    //15C
-		float leafFreq;  //160
-		float unk164;    //164
-		float unk168;    //168
+		float sqrDistanceToCamera;  //158
+		float leafAmplitudeRefr;    //15C
+		float leafFrequency;        //160
+		float runningTime;          //164
+		float previousTimer;        //168
 	};
 	static_assert(sizeof(BSLeafAnimNode) == 0x170);
 }
