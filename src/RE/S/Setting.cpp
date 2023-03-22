@@ -1,85 +1,116 @@
 #include "RE/S/Setting.h"
 
-#include "RE/M/MemoryManager.h"
-
 namespace RE
 {
-	Setting::~Setting()
-	{
-		if (IsManaged()) {
-			free(name);
-		}
-		name = nullptr;
-	}
-
-	bool Setting::Unk_01()
+	bool Setting::IsPreferenceSetting() const
 	{
 		return false;
 	}
 
-	bool Setting::IsManaged() const
+	Setting::Setting(const char* name, bool value) :
+		name(name)
 	{
-		return name && name[0] == 'S';
+		this->data.b = value;
 	}
 
-	auto Setting::GetType() const
-		-> Type
+	Setting::Setting(const char* name, const char* value) :
+		name(name)
 	{
-		if (!name) {
-			return Type::kUnknown;
-		} else {
-			switch (name[0]) {
-			case 'b':
-				return Type::kBool;
-			case 'f':
-				return Type::kFloat;
-			case 'i':
-				return Type::kSignedInteger;
-			case 'r':
-				return Type::kColor;
-			case 'S':
-			case 's':
-				return Type::kString;
-			case 'u':
-				return Type::kUnsignedInteger;
-			default:
-				return Type::kUnknown;
-			}
-		}
+		this->data.s = value;
 	}
 
-	const char* Setting::GetName() const
+	Setting::Setting(const char* name, float value) :
+		name(name)
 	{
-		return name ? name : "";
+		this->data.f = value;
+	}
+
+	Setting::Setting(const char* name, std::int8_t value) :
+		name(name)
+	{
+		this->data.c = value;
+	}
+
+	Setting::Setting(const char* name, std::int32_t value) :
+		name(name)
+	{
+		this->data.i = value;
+	}
+
+	Setting::Setting(const char* name, std::uint8_t value) :
+		name(name)
+	{
+		this->data.h = value;
+	}
+
+	Setting::Setting(const char* name, std::uint32_t value) :
+		name(name)
+	{
+		this->data.u = value;
 	}
 
 	bool Setting::GetBool() const
 	{
-		return data.b;
+		return this->data.b;
+	}
+
+	std::int8_t Setting::GetCharacter() const
+	{
+		return this->data.c;
 	}
 
 	float Setting::GetFloat() const
 	{
-		return data.f;
+		return this->data.f;
 	}
 
-	std::int32_t Setting::GetSInt() const
+	std::int32_t Setting::GetInteger() const
 	{
-		return data.i;
-	}
-
-	Color Setting::GetColor() const
-	{
-		return data.r;
+		return this->data.i;
 	}
 
 	const char* Setting::GetString() const
 	{
-		return data.s ? data.s : "";
+		return this->data.s;
 	}
 
-	std::uint32_t Setting::GetUInt() const
+	std::uint8_t Setting::GetUnsignedCharacter() const
 	{
-		return data.u;
+		return this->data.h;
+	}
+
+	std::uint32_t Setting::GetUnsignedInteger() const
+	{
+		return this->data.u;
+	}
+
+	void Setting::SetBool(bool value)
+	{
+		this->data.b = value;
+	}
+
+	void Setting::SetCharacter(std::int8_t value)
+	{
+		this->data.c = value;
+	}
+
+	void Setting::SetFloat(float value)
+	{
+		this->data.f = value;
+	}
+
+	void Setting::SetInteger(std::int32_t value)
+	{
+		this->data.i = value;
+	}
+
+	void Setting::SetUnsignedCharacter(std::uint8_t value)
+	{
+		this->data.h = value;
+	}
+
+	void Setting::SetUnsignedInteger(std::uint32_t value)
+	{
+		this->data.u = value;
 	}
 }
