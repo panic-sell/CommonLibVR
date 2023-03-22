@@ -784,6 +784,12 @@ namespace RE
 		return true;
 	}
 
+	bool Actor::IsStaggering() const
+	{
+		auto result = false;
+		return this->GetGraphVariableBool("IsStaggering", result) && result;
+	}
+
 	bool Actor::IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, const float a_waterLevel)
 	{
 		return IsPointDeepUnderWater(a_pos.z, a_cell) >= a_waterLevel;
