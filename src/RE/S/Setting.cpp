@@ -2,6 +2,16 @@
 
 namespace RE
 {
+	Setting::~Setting()
+	{
+		if (IsManaged()) {
+			free(name);
+			free(data.s);
+		}
+		name = nullptr;
+		data.s = nullptr;
+	}
+
 	bool Setting::IsPreferenceSetting() const
 	{
 		return false;
@@ -20,10 +30,12 @@ namespace RE
 		this->data.b = value;
 	}
 
-	Setting::Setting(const std::string& name, const char* value) :
+	Setting::Setting(const std::string& name, const std::string& value) :
 		Setting(name)
 	{
-		this->data.s = value;
+		auto charlen = strlen(value.c_str()) + 1;
+		this->data.s = new char[charlen];
+		strcpy_s(this->data.s, charlen, value.c_str());
 	}
 
 	Setting::Setting(const std::string& name, float value) :
@@ -161,6 +173,18 @@ namespace RE
 	void Setting::SetInteger(std::int32_t value)
 	{
 		this->data.i = value;
+	}
+
+	void Setting::SetString(const std::string& value)
+	{
+		if (data.s) {
+			free(data.s);
+			data.s = nullptr;
+		}
+
+		auto charlen = strlen(value.c_str()) + 1;
+		this->data.s = new char[charlen];
+		strcpy_s(this->data.s, charlen, value.c_str());
 	}
 
 	void Setting::SetUnsignedCharacter(std::uint8_t value)

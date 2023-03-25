@@ -34,14 +34,14 @@ namespace RE
 			std::int32_t  i;
 			std::uint32_t u;
 			float         f;
-			const char*   s{ nullptr };
+			char*         s{ nullptr };
 			std::uint32_t r;
 			std::uint32_t a;
 		};
 		static_assert(sizeof(Data) == 0x8);
 
 		// Add
-		virtual ~Setting() = default;              // 0
+		virtual ~Setting();                        // 0
 		virtual bool IsPreferenceSetting() const;  // 1
 
 		Setting() = delete;
@@ -53,7 +53,7 @@ namespace RE
 
 		Setting(const std::string& name);
 		Setting(const std::string& name, bool value);
-		Setting(const std::string& name, const char* value);
+		Setting(const std::string& name, const std::string& value);
 		Setting(const std::string& name, float value);
 		Setting(const std::string& name, std::int8_t value);
 		Setting(const std::string& name, std::int32_t value);
@@ -79,6 +79,7 @@ namespace RE
 		void SetCharacter(std::int8_t value);
 		void SetFloat(float value);
 		void SetInteger(std::int32_t value);
+		void SetString(const std::string& value);
 		void SetUnsignedCharacter(std::uint8_t value);
 		void SetUnsignedInteger(std::uint32_t value);
 		void SetColor(std::uint32_t value);
