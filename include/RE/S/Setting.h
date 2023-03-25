@@ -12,6 +12,7 @@ namespace RE
 
 		enum class Type
 		{
+			kUnknown = -1,
 			kBool = 0,               // b
 			kCharacter = 1,          // c
 			kUnsignedCharacter = 2,  // h
@@ -50,13 +51,18 @@ namespace RE
 		Setting& operator=(const Setting&) = delete;
 		Setting& operator=(Setting&&) = delete;
 
-		Setting(const char* name, bool value);
-		Setting(const char* name, const char* value);
-		Setting(const char* name, float value);
-		Setting(const char* name, std::int8_t value);
-		Setting(const char* name, std::int32_t value);
-		Setting(const char* name, std::uint8_t value);
-		Setting(const char* name, std::uint32_t value);
+		Setting(const std::string& name);
+		Setting(const std::string& name, bool value);
+		Setting(const std::string& name, const char* value);
+		Setting(const std::string& name, float value);
+		Setting(const std::string& name, std::int8_t value);
+		Setting(const std::string& name, std::int32_t value);
+		Setting(const std::string& name, std::uint8_t value);
+		Setting(const std::string& name, std::uint32_t value);
+
+		[[nodiscard]] bool        IsManaged() const;
+		[[nodiscard]] Type        GetType() const;
+		[[nodiscard]] const char* GetName() const;
 
 		// Member functions
 		[[nodiscard]] bool          GetBool() const;
@@ -66,6 +72,8 @@ namespace RE
 		[[nodiscard]] const char*   GetString() const;
 		[[nodiscard]] std::uint8_t  GetUnsignedCharacter() const;
 		[[nodiscard]] std::uint32_t GetUnsignedInteger() const;
+		[[nodiscard]] std::uint32_t GetColor() const;
+		[[nodiscard]] std::uint32_t GetColorA() const;
 
 		void SetBool(bool value);
 		void SetCharacter(std::int8_t value);
@@ -73,10 +81,14 @@ namespace RE
 		void SetInteger(std::int32_t value);
 		void SetUnsignedCharacter(std::uint8_t value);
 		void SetUnsignedInteger(std::uint32_t value);
+		void SetColor(std::uint32_t value);
+		void SetColorA(std::uint32_t value);
 
 		// Member variables
-		Data        data;             // 08
-		const char* name{ nullptr };  // 10
+		Data data;  // 08
+
+	private:
+		char* name{ nullptr };  // 10
 	};
 	static_assert(sizeof(Setting) == 0x18);
 }

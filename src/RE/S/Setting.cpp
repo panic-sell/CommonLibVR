@@ -7,46 +7,95 @@ namespace RE
 		return false;
 	}
 
-	Setting::Setting(const char* name, bool value) :
-		name(name)
+	Setting::Setting(const std::string& name)
+	{
+		auto charlen = strlen(name.c_str()) + 1;
+		this->name = new char[charlen];
+		strcpy_s(this->name, charlen, name.c_str());
+	}
+
+	Setting::Setting(const std::string& name, bool value) :
+		Setting(name)
 	{
 		this->data.b = value;
 	}
 
-	Setting::Setting(const char* name, const char* value) :
-		name(name)
+	Setting::Setting(const std::string& name, const char* value) :
+		Setting(name)
 	{
 		this->data.s = value;
 	}
 
-	Setting::Setting(const char* name, float value) :
-		name(name)
+	Setting::Setting(const std::string& name, float value) :
+		Setting(name)
 	{
 		this->data.f = value;
 	}
 
-	Setting::Setting(const char* name, std::int8_t value) :
-		name(name)
+	Setting::Setting(const std::string& name, std::int8_t value) :
+		Setting(name)
 	{
 		this->data.c = value;
 	}
 
-	Setting::Setting(const char* name, std::int32_t value) :
-		name(name)
+	Setting::Setting(const std::string& name, std::int32_t value) :
+		Setting(name)
 	{
 		this->data.i = value;
 	}
 
-	Setting::Setting(const char* name, std::uint8_t value) :
-		name(name)
+	Setting::Setting(const std::string& name, std::uint8_t value) :
+		Setting(name)
 	{
 		this->data.h = value;
 	}
 
-	Setting::Setting(const char* name, std::uint32_t value) :
-		name(name)
+	Setting::Setting(const std::string& name, std::uint32_t value) :
+		Setting(name)
 	{
 		this->data.u = value;
+	}
+
+	bool Setting::IsManaged() const
+	{
+		return name && name[0] == 'S';
+	}
+
+	auto Setting::GetType() const
+		-> Type
+	{
+		if (!name) {
+			return Type::kUnknown;
+		} else {
+			switch (name[0]) {
+			case 'b':
+				return Type::kBool;
+			case 'c':
+				return Type::kCharacter;
+			case 'h':
+				return Type::kUnsignedCharacter;
+			case 'f':
+				return Type::kFloat;
+			case 'i':
+				return Type::kInteger;
+			case 'r':
+				return Type::kColorRGB;
+			case 'a':
+				return Type::kColorRGBA;
+			case 'S':
+			case 's':
+				return Type::kString;
+			case 'u':
+				return Type::kUnsignedInteger;
+			default:
+				return Type::kUnknown;
+			}
+		}
+	}
+
+	const char* Setting::GetName() const
+	{
+		return name ? name : "";
 	}
 
 	bool Setting::GetBool() const
@@ -84,6 +133,16 @@ namespace RE
 		return this->data.u;
 	}
 
+	std::uint32_t Setting::GetColor() const
+	{
+		return this->data.r;
+	}
+
+	std::uint32_t Setting::GetColorA() const
+	{
+		return this->data.a;
+	}
+
 	void Setting::SetBool(bool value)
 	{
 		this->data.b = value;
@@ -112,5 +171,15 @@ namespace RE
 	void Setting::SetUnsignedInteger(std::uint32_t value)
 	{
 		this->data.u = value;
+	}
+
+	void Setting::SetColor(std::uint32_t value)
+	{
+		this->data.r = value;
+	}
+
+	void Setting::SetColorA(std::uint32_t value)
+	{
+		this->data.a = value;
 	}
 }
