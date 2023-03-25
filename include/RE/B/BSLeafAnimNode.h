@@ -19,9 +19,11 @@ namespace RE
 		bool            RegisterStreamables(NiStream& a_stream) override;   // 1A
 		void            SaveBinary(NiStream& a_stream) override;            // 1B
 		bool            IsEqual(NiObject* a_object) override;               // 1C
-		void            OnVisible(NiCullingProcess& a_process) override;    // 34
+#ifndef SKYRIM_CROSS_VR
+		// The following are virtual functions past the point where VR compatibility breaks.
+		void            OnVisible(NiCullingProcess& a_process) override;  // 34
 		BSLeafAnimNode* AsLeafAnimNode() override;                          // 3F
-
+#endif
 	private:
 		float sqrDistanceToCamera;  //158
 		float leafAmplitudeRefr;    //15C
@@ -29,5 +31,9 @@ namespace RE
 		float runningTime;          //164
 		float previousTimer;        //168
 	};
+#ifndef ENABLE_SKYRIM_VR
+	static_assert(sizeof(BSLeafAnimNode) == 0x128);
+#elif !defined(ENABLE_SKYRIM_AE) && !defined(ENABLE_SKYRIM_SE)
 	static_assert(sizeof(BSLeafAnimNode) == 0x170);
+#endif
 }
