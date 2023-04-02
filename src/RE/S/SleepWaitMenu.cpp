@@ -1,4 +1,4 @@
-#include "SleepWaitMenu.h"
+#include "RE/S/SleepWaitMenu.h"
 
 namespace RE
 {

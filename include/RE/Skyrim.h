@@ -472,6 +472,7 @@
 #include "RE/D/DoNothingUnhandledPolicy.h"
 #include "RE/D/DragonSoulsGained.h"
 #include "RE/D/DropObjectFunctor.h"
+#include "RE/D/DirectionHandler.h"
 #include "RE/E/Effect.h"
 #include "RE/E/EffectArchetypes.h"
 #include "RE/E/EffectSetting.h"
