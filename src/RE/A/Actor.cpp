@@ -584,6 +584,13 @@ namespace RE
 		return func(this, a_ref, a_arg2);
 	}
 
+	bool Actor::HasMagicEffectWithKeyword(RE::BGSKeyword* a_kywd)
+	{
+		using func_t = decltype(&Actor::HasMagicEffectWithKeyword);
+		REL::Relocation<func_t> func{ RELOCATION_ID(19220, 19646) };
+		return func(this, a_kywd);
+	}
+
 	bool Actor::HasPerk(BGSPerk* a_perk) const
 	{
 		using func_t = decltype(&Actor::HasPerk);
@@ -787,7 +794,10 @@ namespace RE
 	bool Actor::IsStaggering() const
 	{
 		auto result = false;
-		return this->GetGraphVariableBool("IsStaggering", result) && result;
+		if (this->GetGraphVariableBool("IsStaggering", result) && result)
+			return result;
+
+		return static_cast<bool>(actorState2.staggered);
 	}
 
 	bool Actor::IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, const float a_waterLevel)
